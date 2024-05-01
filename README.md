@@ -1,7 +1,7 @@
 # Michael-Vs-Lalapan 🪴
  Tugas Besar OOP
 
-
+## Member List
 |            Nama             |    NIM    |    
 |-----------------------------|-----------|
 | Muhammad Yaafi Wasesa Putra | 18222052  | 
