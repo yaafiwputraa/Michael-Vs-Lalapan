@@ -4,10 +4,10 @@ public abstract class Zombie extends GameEntity {
     protected boolean is_aquatic;
     protected boolean is_slowed;
 
-    public Zombie(String name, Integer health, Integer attack_damage, Integer attack_speed, boolean b, boolean c) {
+    public Zombie(String name, Integer health, Integer attack_damage, Integer attack_speed, boolean is_aquatic, boolean is_slowed) {
         super(name, health, attack_damage, attack_speed);
-        is_aquatic = b;
-        is_slowed = c;
+        this.is_aquatic = is_aquatic;
+        this.is_slowed = is_slowed;
     }
 
     public abstract boolean isAquatic();
