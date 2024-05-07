@@ -32,8 +32,6 @@ public class JackInTheBoxZombie extends Zombie implements Explode {
     }
 
     public void explode() {
-        // Implement the logic for exploding here.
-        // For now, we'll just set hasExploded to true.
         this.hasExploded = true;
     }
 }
