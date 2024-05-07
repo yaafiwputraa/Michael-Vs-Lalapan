@@ -21,4 +21,9 @@ public class GigaZombie extends Zombie {
     public Zombie createZombie() {
         return new GigaZombie();
     }
+
+    @Override
+    public void attackPlant() {
+        
+    }
 }
