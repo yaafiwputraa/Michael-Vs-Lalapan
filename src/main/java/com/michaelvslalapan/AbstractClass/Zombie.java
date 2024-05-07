@@ -20,11 +20,7 @@ public abstract class Zombie extends GameEntity {
     
     public abstract Zombie createZombie();
 
-    public void attackPlant() {
-        int foundPlant = 0;
-       // while (i.hasNext()) {
-       // if (plant != null) {
-    }
+    public abstract void attackPlant();
     
 
     public void setHealth(int health) {
