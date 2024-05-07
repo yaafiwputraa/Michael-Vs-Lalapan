@@ -21,9 +21,6 @@ public abstract class Zombie extends GameEntity {
         int foundPlant = 0;
        // while (i.hasNext()) {
        // if (plant != null) {
-
-        
-
     }
     
 
@@ -31,13 +28,21 @@ public abstract class Zombie extends GameEntity {
         this.health = health;
     }
 
+    
+
     public void setSpeed(int speed) {
         speed = 5;
     }
 
     public void bergerak() {
-       // int i = 5;
-       // for (i=0; i<=5; i++) {
+       for (int i = 0; i <= 5; i++){
+        // this.posisi += petak
+        try{
+            Thread.sleep(5000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+       }
 
     }
 }
