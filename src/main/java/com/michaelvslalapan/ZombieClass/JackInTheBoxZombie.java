@@ -31,6 +31,11 @@ public class JackInTheBoxZombie extends Zombie implements Explode {
         return this.hasExploded;
     }
 
+    @Override
+    public void attackPlant() {
+        
+    }
+
     public void explode() {
         this.hasExploded = true;
     }
