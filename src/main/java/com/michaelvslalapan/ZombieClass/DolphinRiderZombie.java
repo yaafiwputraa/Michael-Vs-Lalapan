@@ -28,6 +28,11 @@ public class DolphinRiderZombie extends Zombie implements VaultingInterface {
     }
 
     @Override
+    public void attackPlant() {
+        
+    }
+
+    @Override
     public void vault() {
         // SEMENTARA
         this.hasVaulted = true;
