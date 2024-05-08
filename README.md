@@ -13,3 +13,6 @@ Michael vs. Lalapan merupakan versi sederhana dari permainan populer Plant vs. Z
 | Muhammad Yaafi Wasesa Putra | 18222052  | 
 | Athar Mahendra Umar         | 18222080  | 
 | Kerlyn Deslia Andeskar      | 18222090  |
+
+
+## How to Run Game
