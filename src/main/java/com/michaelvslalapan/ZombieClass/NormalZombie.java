@@ -18,6 +18,11 @@ public class NormalZombie extends Zombie {
     }
 
     @Override
+    public void attackPlant() {
+        
+    }
+    
+    @Override
     public Zombie createZombie() {
         return new NormalZombie();
     }
