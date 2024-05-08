@@ -27,11 +27,17 @@ public class PoleVaultingZombie extends Zombie implements VaultingInterface {
     }
 
     @Override
+    public void attackPlant() {
+        
+    }
+
+    @Override
     public void vault() {
         // INI NUNGGU TILE AMA GAMEMAP YAA
         // NANTI DISESUAIIN
         this.hasVaulted = true;
     }
+
 
     @Override
     public boolean getVaulted() {
