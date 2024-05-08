@@ -21,4 +21,9 @@ public class DuckyTubeZombie extends Zombie {
     public Zombie createZombie() {
         return new DuckyTubeZombie();
     }
+
+    @Override
+    public void attackPlant() {
+        
+    }
 }
