@@ -1,4 +1,6 @@
 import java.util.List;
+
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 public class Repeater extends Plant {
     private GameMap gameMap;
 

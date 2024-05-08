@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
+
 public class GameMap {
     private List<Plant> plants = new ArrayList<>();
     private List<Zombie> zombies = new ArrayList<>();

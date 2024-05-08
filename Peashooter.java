@@ -1,3 +1,5 @@
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
+
 public class Peashooter extends Plant {
     private GameMap gameMap;
 

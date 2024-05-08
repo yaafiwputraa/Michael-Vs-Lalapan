@@ -1,3 +1,4 @@
+package main.java.com.michaelvslalapan.AbstractClass;
 public abstract class Plant {
     protected int cost;
     protected int health;

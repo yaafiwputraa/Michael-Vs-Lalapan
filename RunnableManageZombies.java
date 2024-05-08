@@ -1,3 +1,5 @@
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
+
 public class RunnableManageZombies implements Runnable {
     private GameMap gameMap;
     private final int moveInterval = 5000; // Zombie moves every 5 seconds

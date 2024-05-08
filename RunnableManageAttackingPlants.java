@@ -1,3 +1,5 @@
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
+
 public class RunnableManageAttackingPlants implements Runnable {
     private GameMap gameMap;
 

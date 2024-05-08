@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
+
 public class Main {
     public static void main(String[] args) {
         GameMap gameMap = new GameMap(11, 6);  // Initialize the game map with dimensions 11x6
