@@ -8,15 +8,15 @@ import main.java.com.michaelvslalapan.Map.GameMap;
 
 public abstract class GameEntity implements Excecute {
     protected String name;
-    protected Float health;
-    protected Float attack_damage;
-    protected Float attack_speed;
+    protected int health;
+    protected int attack_damage;
+    protected int attack_speed;
     protected GameMap tile;
     protected boolean isAquatic;
     private int x;
     private int y;
     
-    public GameEntity(String name, float health, float attack_damage, float attack_speed, GameMap tile, boolean isAquatic, int x, int y) {
+    public GameEntity(String name, int health, int attack_damage, int attack_speed, GameMap tile, boolean isAquatic, int x, int y) {
         this.name = name;
         this.health = health;
         this.attack_damage = attack_damage;
@@ -35,31 +35,31 @@ public abstract class GameEntity implements Excecute {
         return name;
     }
 
-    public void setHealth(Float health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 
-    public Float getHealth() {
+    public int getHealth() {
         return health;
     }
 
-    public void decreaseHealth(Float damage) {
+    public void decreaseHealth(int damage) {
         this.health = this.health - damage;
     }
 
-    public void setAttackDamage(Float attack_damage) {
+    public void setAttackDamage(int attack_damage) {
         this.attack_damage = attack_damage;
     }
 
-    public Float getAttackDamage() {
+    public int getAttackDamage() {
         return attack_damage;
     }
 
-    public void setAttackSpeed(Float attack_speed) {
+    public void setAttackSpeed(int attack_speed) {
         this.attack_speed = attack_speed;
     }
 
-    public Float getAttackSpeed(){
+    public int getAttackSpeed(){
         return attack_speed;
     }
 

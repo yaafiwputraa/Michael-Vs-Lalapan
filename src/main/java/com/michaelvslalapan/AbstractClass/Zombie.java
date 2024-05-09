@@ -6,24 +6,24 @@ import main.java.com.michaelvslalapan.Map.GameMap;
 
 
 public abstract class Zombie extends GameEntity {
-    private Float speed;
+    private int speed;
     private boolean isZombieBergerak;
     private boolean isSlowed;
     private ScheduledExecutorService timer;
     private ScheduledFuture<?> scheduledFuture;
 
-    public Zombie(String name, Float health, Float attack_damage, Float attack_speed, GameMap tile, boolean isAquatic, int x, int y, Float speed) {        
+    public Zombie(String name, int health, int attack_damage, int attack_speed, GameMap tile, boolean isAquatic, int x, int y, int speed) {        
         super(name, health, attack_damage, attack_speed, tile, isAquatic, x, y);
         this.isSlowed = false; // scr default zombie ga slow kalo ga kena snowpea
         this.isZombieBergerak = true; // scr default zombie bergerak, akan stop sbntr kalo kena snowpea
         timer = Executors.newSingleThreadScheduledExecutor();
     }
        
-    public void setSpeed(Float speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
-    public Float getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
@@ -44,11 +44,11 @@ public abstract class Zombie extends GameEntity {
     }
     
    // @Override
-    public void setAttackSpeed(Float attack_speed) {
+    public void setAttackSpeed(int attack_speed) {
         this.attack_speed = attack_speed;
     }
 
-    public Float getAttackSpeed() {
+    public int getAttackSpeed() {
         return this.attack_speed;
     }
 
@@ -64,14 +64,14 @@ public abstract class Zombie extends GameEntity {
         plant.reduceHealth(getAttackDamage());
     }
 
-    public void setHealth(Float health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 
     public void takeDamage(int damage) {
         health -= damage;
         if (health <= 0) {
-            health = 0f;
+            health = 0;
         }
     }
 
@@ -84,8 +84,8 @@ public abstract class Zombie extends GameEntity {
     public void struckBySnowPea() {
        if (!isSlowed) { 
             isSlowed = true;
-            setSpeed(getSpeed() * 0.5f);
-            setAttackSpeed(getAttackSpeed() * 0.5f);
+            setSpeed(getSpeed() / 2);
+            setAttackSpeed(getAttackSpeed() / 2);
 
         // Efek ini hanya bertahan selama 3 detik kalo si zombie sdh tdk lg ditembak oleh snowpea.
             if (scheduledFuture != null && !scheduledFuture.isDone()) {
