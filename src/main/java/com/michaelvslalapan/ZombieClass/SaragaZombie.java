@@ -4,11 +4,11 @@ import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.Map.GameMap;
 
-public class NormalZombie extends Zombie {
+public class SaragaZombie extends Zombie {
     private GameMap gameMap;
 
-    public NormalZombie() {
-        super("Normal Zombie", 125, 100, 1, false, false, , y);
+    public SaragaZombie() {
+        super("Normal Zombie", 125, 100, 1, false, false, x, y);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class NormalZombie extends Zombie {
     
     @Override
     public Zombie createZombie() {
-        return new NormalZombie();
+        return new SaragaZombie();
     }
 }

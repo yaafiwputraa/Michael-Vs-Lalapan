@@ -1,4 +1,5 @@
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.Map.GameMap;
 
 public class Peashooter extends Plant {
@@ -14,7 +15,7 @@ public class Peashooter extends Plant {
         // Attack all zombies in the same column
         for (Zombie zombie : gameMap.getZombiesInColumn(y)) {
             if (zombie.isAlive()) {
-                zombie.takeDamage(attackDamage);
+                zombie.takeDamage(getAttackDamage());
             }
         }
     }

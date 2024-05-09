@@ -3,8 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.PlantClass.Peashooter;
-import main.java.com.michaelvslalapan.PlantClass.Sunflower;
+import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 
 public class GameMap {
     private List<Plant> plants = new ArrayList<>();
@@ -20,10 +19,10 @@ public class GameMap {
     }
 
     public boolean addPlant(Plant plant) {
-        if (currentSuns >= plant.cost && plant.x >= 0 && plant.x < width && plant.y >= 0 && plant.y < height) {
+        if (currentSuns >= plant.getCost() && plant.getX() >= 0 && plant.getX() < width && plant.getY() >= 0 && plant.getY() < height) {
             plants.add(plant);
-            currentSuns -= plant.cost;  // Deduct the cost of the plant from the current suns
-            System.out.println("Plant added at (" + plant.x + ", " + plant.y + ")");
+            currentSuns -= plant.getCost();  // Deduct the cost of the plant from the current suns
+            System.out.println("Plant added at (" + plant.getX() + ", " + plant.getY() + ")");
             return true;
         }
         System.out.println("Not enough suns or invalid position.");
@@ -31,7 +30,7 @@ public class GameMap {
     }
 
     public void removePlant(int x, int y) {
-        plants.removeIf(plant -> plant.x == x && plant.y == y);
+        plants.removeIf(plant -> plant.getX() == x && plant.getY() == y);
         System.out.println("Plant removed from (" + x + ", " + y + ")");
     }
 

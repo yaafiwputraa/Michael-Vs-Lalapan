@@ -1,5 +1,6 @@
 package main.java.com.michaelvslalapan.AbstractClass;
 
+
 public abstract class Plant extends GameEntity {
     private int cost;
     protected int range;

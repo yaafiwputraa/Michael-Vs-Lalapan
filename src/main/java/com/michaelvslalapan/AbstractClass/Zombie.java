@@ -1,5 +1,5 @@
 package main.java.com.michaelvslalapan.AbstractClass;
-
+import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 public abstract class Zombie extends GameEntity {
     protected boolean is_aquatic;
     protected boolean is_slowed;
