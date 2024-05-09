@@ -38,7 +38,7 @@ public class Deck {
     public boolean canStartGame() {
         return !deckPlants.isEmpty(); // cek jika deck ga kosong
     }
-    /* di main nnti 
+    /* utk di main nnti 
     public void startGame(Deck deck) {
         if (deck.canStartGame()) {
             System.out.println("Permainan dimulai!");
@@ -52,4 +52,3 @@ public class Deck {
     
 }
 
-// jangan lupa tanganin kalo deck kosong gak bisa maen game
