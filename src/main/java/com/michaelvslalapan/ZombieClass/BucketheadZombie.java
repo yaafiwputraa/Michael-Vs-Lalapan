@@ -5,7 +5,7 @@ import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 
 public class BucketheadZombie extends Zombie {
     public BucketheadZombie() {
-        super("Buckethead Zombie", 300, 100, 1, false, false, 0, 0);
+        super("Buckethead Zombie", 300, 100, 1, false, false, x, y);
     }
 
     @Override
