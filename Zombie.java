@@ -1,5 +1,3 @@
-import main.java.com.michaelvslalapan.AbstractClass.Plant;
-
 public class Zombie {
     private int health;
     private int attackDamage;

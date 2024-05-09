@@ -1,38 +1,32 @@
 package main.java.com.michaelvslalapan.AbstractClass;
-public abstract class Plant {
-    protected int cost;
-    protected int health;
-    protected int attackDamage;
-    protected int attackSpeed;  
+
+public abstract class Plant extends GameEntity {
     protected int range;
     protected int cooldown;  
-    protected int x, y;  
     protected long nextActionTime;
 
-    public Plant(int cost, int health, int attackDamage, int attackSpeed, int range, int cooldown, int x, int y) {
-        this.cost = cost;
-        this.health = health;
-        this.attackDamage = attackDamage;
-        this.attackSpeed = attackSpeed;
+    public Plant(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, int x, int y, int range, int cooldown) {
+        super(name, health, attack_damage, attack_speed, is_aquatic, x, y);
         this.range = range;
         this.cooldown = cooldown;
-        this.x = x;
-        this.y = y;
-        this.nextActionTime = System.currentTimeMillis() + (attackSpeed * 1000);
+        this.nextActionTime = System.currentTimeMillis() + (attack_speed * 1000);
     }
 
     public abstract void performAction();  
     public abstract boolean isAttackingType();  
 
     // Getters 
-    public int getCost() { return cost; }
-    public int getHealth() { return health; }
-    public int getAttackDamage() { return attackDamage; }
-    public int getAttackSpeed() { return attackSpeed; }
-    public int getRange() { return range; }
-    public int getCooldown() { return cooldown; }
-    public int getX() { return x; }
-    public int getY() { return y; }
+    public int getRange() { 
+        return range; 
+    }
+
+    public int getCooldown() { 
+        return cooldown; 
+    }
+
+    public long getNextActionTime() {
+        return nextActionTime;
+    }
 
     public void reduceHealth(int damage) {
         health -= damage;
@@ -43,10 +37,6 @@ public abstract class Plant {
 
     public boolean isAlive() {
         return health > 0;
-    }
-
-    public long getNextActionTime() {
-        return nextActionTime;
     }
 
     public void setNextActionTime(long nextActionTime) {
