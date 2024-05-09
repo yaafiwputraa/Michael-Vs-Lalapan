@@ -1,3 +1,5 @@
+package main.java.com.michaelvslalapan.PlantClass;
+
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.Map.GameMap;
@@ -6,7 +8,7 @@ public class Peashooter extends Plant {
     private GameMap gameMap;
 
     public Peashooter(int x, int y, GameMap gameMap) {
-        super(100, 100, 25, 4, -1, 10, x, y);
+        super("Peashooter", 100, 100, 25, 4, false, x, y);
         this.gameMap = gameMap;
     }
 

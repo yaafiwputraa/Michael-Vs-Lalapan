@@ -40,6 +40,10 @@ public abstract class Zombie extends GameEntity {
         this.speed = speed;
     }
 
+    public boolean isAlive(){
+        return health > 0;
+    }
+
     public int getSpeed(){
         return this.speed;
     }
