@@ -9,6 +9,7 @@ public class MainMenu {
         boolean isRunning = true;
 
         while (isRunning) {
+            System.out.println("");
             System.out.println("========== Plants vs. Zombies ==========");
             System.out.println("Main Menu:");
             System.out.println("1. Start");
@@ -44,21 +45,30 @@ public class MainMenu {
     }
 
     private static void startGame() {
+        System.out.println("");
         System.out.println("Starting the game...");
         // Implementasi logic untuk memulai game
     }
 
     private static void displayHelp() {
+        System.out.println("");
         System.out.println("Menampilkan help...");
+        System.out.println("1. Start \n Menu ini digunakan untuk memulai game. Permainan dimulai dengan pemain mengatur deck tanaman yang akan dipakai.");
+        System.out.println("2. Help \n Menu ini akan memberikan deskripsi dari permainan, arahan cara bermain untuk pemain, dan daftar command yang dapat dipakai.");
+        System.out.println("3. Plants List \n Menu ini untuk menampilkan list dari informasi tanaman yang dapat digunakan dalam permainan.");
+        System.out.println("4. Zombies List \n Menu ini untuk menampilkan list dari informasi zombie yang dapat muncul dalam permainan.");
+        System.out.println("5. Exit \n Menu untuk keluar dari permainan.");
         // Implementasi logic untuk menampilkan help
     }
 
     private static void displayPlantsList() {
+        System.out.println("");
         System.out.println("Menampilkan plants list...");
         // Implementasi logic untuk menampilkan plants list
     }
 
     private static void displayZombiesList() {
+        System.out.println("");
         System.out.println("Menampilkan zombies list...");
         // Implementasi logic untuk menampilkan plants list
     }
