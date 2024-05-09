@@ -1,11 +1,13 @@
 package main.java.com.michaelvslalapan.ZombieClass;
 
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 
 public class NewspaperZombie extends Zombie {
     public NewspaperZombie() {
-        super("GigaZombie", 150, 100, 1, false, false);
+        super("GigaZombie", 150, 100, 1, false, false, 0, 0);
     }
+    
 
     @Override
     public boolean isAquatic() {
@@ -23,7 +25,8 @@ public class NewspaperZombie extends Zombie {
     }
 
     @Override
-    public void attackPlant() {
-        
+    public void attackPlant(Plant plant){
+        plant.reduceHealth(getAttackDamage());
     }
+    
 }

@@ -1,5 +1,6 @@
 package main.java.com.michaelvslalapan.ZombieClass;
 
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.Interface.VaultingInterface;
 
@@ -7,7 +8,7 @@ public class DolphinRiderZombie extends Zombie implements VaultingInterface {
     private boolean hasVaulted;
 
     public DolphinRiderZombie() {
-        super("Dolphin Rider Zombie", 175, 100, 1, true, false);
+        super("Dolphin Rider Zombie", 175, 100, 1, true, false, 0,0);
         this.hasVaulted = false;
     }
 
@@ -28,8 +29,8 @@ public class DolphinRiderZombie extends Zombie implements VaultingInterface {
     }
 
     @Override
-    public void attackPlant() {
-        
+    public void attackPlant(Plant plant){
+        plant.reduceHealth(getAttackDamage());
     }
 
     @Override
