@@ -1,6 +1,8 @@
+package main.java.com.michaelvslalapan.PlantClass;
 import java.util.List;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.Map.GameMap;
 public class Repeater extends Plant {
     private GameMap gameMap;
 

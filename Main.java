@@ -3,6 +3,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.PlantClass.Peashooter;
+import main.java.com.michaelvslalapan.PlantClass.Repeater;
+import main.java.com.michaelvslalapan.PlantClass.Sunflower;
 
 public class Main {
     public static void main(String[] args) {

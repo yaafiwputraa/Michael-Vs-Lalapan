@@ -1,3 +1,5 @@
+import main.java.com.michaelvslalapan.Map.GameMap;
+
 public class RunnableCooldownPlant implements Runnable {
     private GameMap gameMap;
     private int checkInterval = 1000; // Check every second

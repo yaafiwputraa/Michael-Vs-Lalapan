@@ -1,4 +1,5 @@
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.Map.GameMap;
 
 public class Sunflower extends Plant {
     private GameMap gameMap;

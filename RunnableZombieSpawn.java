@@ -1,5 +1,7 @@
 import java.util.Random;
 
+import main.java.com.michaelvslalapan.Map.GameMap;
+
 public class RunnableZombieSpawn implements Runnable {
     private GameMap gameMap;
     private int spawnInterval = 10000; // 10 seconds in milliseconds

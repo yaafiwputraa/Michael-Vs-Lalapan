@@ -1,7 +1,10 @@
+package main.java.com.michaelvslalapan.Map;
 import java.util.ArrayList;
 import java.util.List;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.PlantClass.Peashooter;
+import main.java.com.michaelvslalapan.PlantClass.Sunflower;
 
 public class GameMap {
     private List<Plant> plants = new ArrayList<>();

@@ -1,5 +1,8 @@
 import java.util.Random;
 
+import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.PlantClass.Sunflower;
+
 public class RunnableGenerateSun implements Runnable {
     private GameMap gameMap;
     private Random random = new Random();
