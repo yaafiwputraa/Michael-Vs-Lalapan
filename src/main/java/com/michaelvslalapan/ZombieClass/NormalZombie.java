@@ -1,5 +1,6 @@
 package main.java.com.michaelvslalapan.ZombieClass;
 
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 
 public class NormalZombie extends Zombie {
@@ -16,10 +17,9 @@ public class NormalZombie extends Zombie {
     public boolean isSlowed() {
         return this.is_slowed;
     }
-
     @Override
-    public void attackPlant() {
-        
+    public void attackPlant(Plant plant){
+        plant.reduceHealth(getAttackDamage());
     }
     
     @Override

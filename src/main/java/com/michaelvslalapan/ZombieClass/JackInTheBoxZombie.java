@@ -1,5 +1,6 @@
 package main.java.com.michaelvslalapan.ZombieClass;
 
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.Interface.Explode;
 
@@ -7,7 +8,7 @@ public class JackInTheBoxZombie extends Zombie implements Explode {
     private boolean hasExploded;
 
     public JackInTheBoxZombie() {
-        super("JackInTheBox", 125, 1000, 1, false, false);
+        super("JackInTheBox", 125, 1000, 1, false, false,0,0);
         this.hasExploded = false;
     }
 
@@ -32,8 +33,8 @@ public class JackInTheBoxZombie extends Zombie implements Explode {
     }
 
     @Override
-    public void attackPlant() {
-        
+    public void attackPlant(Plant plant){
+        plant.reduceHealth(getAttackDamage());
     }
 
     public void explode() {

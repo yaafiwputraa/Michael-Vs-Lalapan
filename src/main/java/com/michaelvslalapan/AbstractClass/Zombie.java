@@ -21,12 +21,8 @@ public abstract class Zombie extends GameEntity {
     
     public abstract Zombie createZombie();
 
-    public abstract void attackPlant();
+    public abstract void attackPlant(Plant plant);
     
-
-    public void attack(Plant plant){
-        plant.reduceHealth(getAttackDamage());
-    }
 
     public void setHealth(int health) {
         this.health = health;

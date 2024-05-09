@@ -1,10 +1,8 @@
 package main.java.com.michaelvslalapan.AbstractClass;
 
-import java.util.Objects;
 
 public abstract class GameEntity {
     protected String name;
-    private int cost;
     protected int health;
     private int attack_damage;
     private int attack_speed;
@@ -23,9 +21,6 @@ public abstract class GameEntity {
     }
 
     // Getters
-    public int getCost() {
-        return cost;
-    }
 
     public int getAttackDamage() {
         return attack_damage;

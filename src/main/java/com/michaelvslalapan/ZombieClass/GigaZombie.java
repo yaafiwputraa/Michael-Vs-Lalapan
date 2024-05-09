@@ -1,10 +1,11 @@
 package main.java.com.michaelvslalapan.ZombieClass;
 
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 
 public class GigaZombie extends Zombie {
     public GigaZombie() {
-        super("GigaZombie", 400, 500, 4, false, false);
+        super("GigaZombie", 400, 500, 4, false, false, 0, 0);
     }
 
     @Override
@@ -23,7 +24,7 @@ public class GigaZombie extends Zombie {
     }
 
     @Override
-    public void attackPlant() {
-        
+    public void attackPlant(Plant plant){
+        plant.reduceHealth(getAttackDamage());
     }
 }

@@ -1,10 +1,11 @@
 package main.java.com.michaelvslalapan.ZombieClass;
 
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 
 public class DuckyTubeZombie extends Zombie {
     public DuckyTubeZombie() {
-        super("Ducky Tube Zombie", 100, 100, 1, true, false);
+        super("Ducky Tube Zombie", 100, 100, 1, true, false,0,0);
     }
 
     @Override
@@ -23,7 +24,7 @@ public class DuckyTubeZombie extends Zombie {
     }
 
     @Override
-    public void attackPlant() {
-        
+    public void attackPlant(Plant plant){
+        plant.reduceHealth(getAttackDamage());
     }
 }
