@@ -1,4 +1,4 @@
-package main.java.com.michaelvslalapan.ZombieClass;
+package main.java.com.michaelvslalapan.child_zombie;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;

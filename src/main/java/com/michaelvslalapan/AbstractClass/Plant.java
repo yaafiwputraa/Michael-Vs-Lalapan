@@ -37,7 +37,7 @@ public abstract class Plant extends GameEntity {
         return nextActionTime;
     }
 
-    public void reduceHealth(Float damage) {
+    public void reduceHealth(int damage) {
         health -= damage;
         if (health <= 0) {
             health = 0;

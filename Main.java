@@ -4,9 +4,9 @@ import java.util.concurrent.Executors;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.Map.GameMap;
-import main.java.com.michaelvslalapan.PlantClass.Peashooter;
-import main.java.com.michaelvslalapan.PlantClass.Repeater;
-import main.java.com.michaelvslalapan.PlantClass.Sunflower;
+import main.java.com.michaelvslalapan.child_plant.Peashooter;
+import main.java.com.michaelvslalapan.child_plant.Repeater;
+import main.java.com.michaelvslalapan.child_plant.Sunflower;
 
 public class Main {
     public static void main(String[] args) {
