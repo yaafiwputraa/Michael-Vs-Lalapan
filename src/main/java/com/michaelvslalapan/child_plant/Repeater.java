@@ -1,4 +1,4 @@
-package main.java.com.michaelvslalapan.PlantClass;
+package main.java.com.michaelvslalapan.child_plant;
 import java.util.List;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;

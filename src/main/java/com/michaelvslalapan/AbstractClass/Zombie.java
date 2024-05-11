@@ -1,7 +1,6 @@
 package main.java.com.michaelvslalapan.AbstractClass;
 import java.util.concurrent.*;
 
-import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.Map.GameMap;
 
 
@@ -43,7 +42,6 @@ public abstract class Zombie extends GameEntity {
         isSlowed = !isSlowed;
     }
     
-   // @Override
     public void setAttackSpeed(int attack_speed) {
         this.attack_speed = attack_speed;
     }

@@ -9,7 +9,7 @@ public abstract class Plant extends GameEntity {
     private long prev_time; 
     private long nextActionTime;
 
-    public Plant(String name, Float health, Float attack_damage, Float attack_speed, GameMap tile, boolean isAquatic, int x, int y, int cost, int range, int cooldown) {
+    public Plant(String name, int health, int attack_damage, int attack_speed, GameMap tile, boolean isAquatic, int x, int y, int cost, int range, int cooldown) {
         super(name, health, attack_damage, attack_speed, tile, isAquatic, x, y);
         this.cost = cost;
         this.range = range;
@@ -37,10 +37,10 @@ public abstract class Plant extends GameEntity {
         return nextActionTime;
     }
 
-    public void reduceHealth(Float damage) {
+    public void reduceHealth(int damage) {
         health -= damage;
         if (health <= 0) {
-            health = 0f;
+            health = 0;
         }
     }
 
