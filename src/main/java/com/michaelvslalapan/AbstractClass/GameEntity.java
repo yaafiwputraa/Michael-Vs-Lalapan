@@ -1,5 +1,6 @@
 package main.java.com.michaelvslalapan.AbstractClass;
 
+import main.java.com.michaelvslalapan.GameMap;
 
 public abstract class GameEntity {
     protected String name;
@@ -9,8 +10,9 @@ public abstract class GameEntity {
     protected boolean isAquatic;
     private int x;
     private int y;
+    private GameMap gameMap;
     
-    public GameEntity(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y) {
+    public GameEntity(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, GameMap gameMap) {
         this.name = name;
         this.health = health;
         this.attack_damage = attack_damage;
@@ -18,6 +20,7 @@ public abstract class GameEntity {
         this.isAquatic = isAquatic;
         this.x = x;
         this.y = y;
+        this.gameMap = gameMap;
     }
 
     public void setName(String name) {

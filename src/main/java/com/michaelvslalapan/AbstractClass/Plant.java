@@ -9,8 +9,8 @@ public abstract class Plant extends GameEntity {
     private long prev_time; 
     private long nextActionTime;
 
-    public Plant(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int cost, int range, int cooldown) {
-        super(name, health, attack_damage, attack_speed, isAquatic, x, y);
+    public Plant(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int cost, int range, int cooldown, GameMap gameMap) {
+        super(name, health, attack_damage, attack_speed, isAquatic, x, y, gameMap);
         this.cost = cost;
         this.range = range;
         this.cooldown = cooldown;

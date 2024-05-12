@@ -14,8 +14,8 @@ public abstract class Zombie extends GameEntity {
     private ScheduledFuture<?> scheduledFuture;
 
 
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int speed) {        
-        super(name, health, attack_damage, attack_speed, isAquatic, x, y);
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int speed, GameMap gameMap) {        
+        super(name, health, attack_damage, attack_speed, isAquatic, x, y, gameMap);
         this.isSlowed = false; // scr default zombie ga slow kalo ga kena snowpea
         this.isZombieBergerak = true; // scr default zombie bergerak, akan stop sbntr kalo kena snowpea
         timer = Executors.newSingleThreadScheduledExecutor();
