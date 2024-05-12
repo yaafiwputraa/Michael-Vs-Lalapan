@@ -1,6 +1,6 @@
 package main.java.com.michaelvslalapan.AbstractClass;
 
-import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.GameMap;
 
 public abstract class Plant extends GameEntity {
     private int cost;
@@ -9,8 +9,8 @@ public abstract class Plant extends GameEntity {
     private long prev_time; 
     private long nextActionTime;
 
-    public Plant(String name, int health, int attack_damage, int attack_speed, GameMap tile, boolean isAquatic, int x, int y, int cost, int range, int cooldown) {
-        super(name, health, attack_damage, attack_speed, tile, isAquatic, x, y);
+    public Plant(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int cost, int range, int cooldown) {
+        super(name, health, attack_damage, attack_speed, isAquatic, x, y);
         this.cost = cost;
         this.range = range;
         this.cooldown = cooldown;
@@ -75,5 +75,16 @@ public abstract class Plant extends GameEntity {
         System.out.printf("%s telah ditanam pada (%d, %d)\n", name, x, y);
     }
     
+    //public abstract void excecute();
+    public void displayPlant() {
+        System.out.println("Name: " + getName());
+        System.out.println("Cost: " + getCost());
+        System.out.println("Health: " + getHealth());
+        System.out.println("Attack damage: " + getAttackDamage());
+        System.out.println("attack speed: " + getAttackSpeed());
+        System.out.println("range: " + getRange());
+        System.out.println("cooldown: " + getCooldown());
+        System.out.println("isAquatic: " + isAquatic());
+    }
 }
 
