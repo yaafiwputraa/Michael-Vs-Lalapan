@@ -1,7 +1,9 @@
 package main.java.com.michaelvslalapan.AbstractClass;
 import java.util.concurrent.*;
 
-import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.GameMap;
+import main.java.com.michaelvslalapan.TileType;
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 
 
 public abstract class Zombie extends GameEntity {
@@ -11,11 +13,13 @@ public abstract class Zombie extends GameEntity {
     private ScheduledExecutorService timer;
     private ScheduledFuture<?> scheduledFuture;
 
-    public Zombie(String name, int health, int attack_damage, int attack_speed, GameMap tile, boolean isAquatic, int x, int y, int speed) {        
-        super(name, health, attack_damage, attack_speed, tile, isAquatic, x, y);
+
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int speed, GameMap gameMap) {        
+        super(name, health, attack_damage, attack_speed, isAquatic, x, y, gameMap);
         this.isSlowed = false; // scr default zombie ga slow kalo ga kena snowpea
         this.isZombieBergerak = true; // scr default zombie bergerak, akan stop sbntr kalo kena snowpea
         timer = Executors.newSingleThreadScheduledExecutor();
+        
     }
        
     public void setSpeed(int speed) {
@@ -42,6 +46,7 @@ public abstract class Zombie extends GameEntity {
         isSlowed = !isSlowed;
     }
     
+   // @Override
     public void setAttackSpeed(int attack_speed) {
         this.attack_speed = attack_speed;
     }
@@ -74,9 +79,12 @@ public abstract class Zombie extends GameEntity {
     }
 
     public void bergerak() {
+        
         if (getX() > 0) {
             setX(getX() - 1); // Move zombie one step to the left
+        
         }
+
     }
 
     public void struckBySnowPea() {
@@ -102,7 +110,16 @@ public abstract class Zombie extends GameEntity {
     }
     
     public void shutdown() { // Mematikan executor ketika tdk lg dibutuhkan
-            timer.shutdown();
+            timer.shutdown(); 
+            // untuk menutup executor. PASTIKAN method ini dipanggil ketika Zombie dihapus dari game atau ketika game berakhir.
+    }
+    
+    public void displayZombie() {
+        System.out.println("Name: " + getName());
+        System.out.println("Health: " + getHealth());
+        System.out.println("Attack damage: " + getAttackDamage());
+        System.out.println("attack speed: " + getAttackSpeed());
+        System.out.println("isAquatic: " + isAquatic());
     }
 
 }

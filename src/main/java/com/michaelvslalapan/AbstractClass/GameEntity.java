@@ -1,30 +1,26 @@
 package main.java.com.michaelvslalapan.AbstractClass;
 
+import main.java.com.michaelvslalapan.GameMap;
 
-import main.java.com.michaelvslalapan.Interface.Excecute;
-import main.java.com.michaelvslalapan.Map.GameMap;
-
-
-
-public abstract class GameEntity implements Excecute {
+public abstract class GameEntity {
     protected String name;
     protected int health;
     protected int attack_damage;
     protected int attack_speed;
-    protected GameMap tile;
     protected boolean isAquatic;
     private int x;
     private int y;
+    private GameMap gameMap;
     
-    public GameEntity(String name, int health, int attack_damage, int attack_speed, GameMap tile, boolean isAquatic, int x, int y) {
+    public GameEntity(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, GameMap gameMap) {
         this.name = name;
         this.health = health;
         this.attack_damage = attack_damage;
         this.attack_speed = attack_speed;
-        this.tile = tile;
         this.isAquatic = isAquatic;
         this.x = x;
         this.y = y;
+        this.gameMap = gameMap;
     }
 
     public void setName(String name) {
@@ -63,14 +59,6 @@ public abstract class GameEntity implements Excecute {
         return attack_speed;
     }
 
-    public void setTile(GameMap tile) {
-        this.tile = tile;
-    }
-
-    public GameMap getTile() {
-        return tile;
-    }
-    
     public void setIsAquatic(boolean isAquatic) {
         this.isAquatic = isAquatic;
     }
@@ -96,5 +84,5 @@ public abstract class GameEntity implements Excecute {
         return y;
     }
 
-    public abstract void excecute();
+   
 }
