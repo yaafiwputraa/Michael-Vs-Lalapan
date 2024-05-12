@@ -1,7 +1,6 @@
 package main.java.com.michaelvslalapan.child_zombie;
 
-import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.AbstractClass.Zombie;
+import main.java.com.michaelvslalapan.AbstractClass.*;
 
 public class ConeheadZombie extends Zombie {
     public ConeheadZombie() {

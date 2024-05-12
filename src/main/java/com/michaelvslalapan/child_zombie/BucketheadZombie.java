@@ -10,13 +10,12 @@ public class BucketheadZombie extends Zombie {
 
     @Override
     public boolean isAquatic() {
-        
-        return this.is_aquatic;
+        return super.isAquatic();
     }
 
     @Override
     public boolean isSlowed() {
-        return this.is_slowed;
+        return super.isSlowed();
     }
 
     @Override
@@ -24,10 +23,13 @@ public class BucketheadZombie extends Zombie {
         return new BucketheadZombie();
     }
 
-    @Override
-    public void attackPlant(Plant plant) {
-            plant.reduceHealth(getAttackDamage());
+    @
         }
+
+	@Override
+	public void excecute() {
+		
+	}
 
    
     }

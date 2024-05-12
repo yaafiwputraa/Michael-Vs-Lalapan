@@ -7,19 +7,18 @@ import main.java.com.michaelvslalapan.Map.GameMap;
 public class NormalZombie extends Zombie {
     private GameMap gameMap;
 
-    public NormalZombie(int x, int y, GameMap gameMap) {
-        super("Normal Zombie", 125, 100, 1, false, false,x, y);
+    public NormalZombie() {
+        super(name, health, attack_damage, attack_speed, tile, isAquatic, x, y, speed);
         this.gameMap = gameMap;
     }
-
     @Override
     public boolean isAquatic() {
-        return this.is_aquatic;
+        return super.isAquatic();
     }
 
     @Override
     public boolean isSlowed() {
-        return this.is_slowed;
+        return super.isSlowed();
     }
     @Override
     public void attackPlant(Plant plant){
@@ -28,6 +27,10 @@ public class NormalZombie extends Zombie {
     
     @Override
     public Zombie createZombie() {
-        return new NormalZombie();
+        return new NormalZombie("Normal Zombie", 125, 100, 1, gameMap, false, 0, 0, 1);
+    }
+    @Override
+    public void excecute() {
+        
     }
 }

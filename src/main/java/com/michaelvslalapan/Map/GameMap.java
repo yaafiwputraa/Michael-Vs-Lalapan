@@ -2,8 +2,9 @@ package main.java.com.michaelvslalapan.Map;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.AbstractClass.Zombie;
+import main.java.com.michaelvslalapan.AbstractClass.*;
+import main.java.com.michaelvslalapan.child_plant.*;
+
 
 public class GameMap {
     private List<Plant> plants = new ArrayList<>();
@@ -108,7 +109,7 @@ public class GameMap {
             } else if (plant instanceof Peashooter) {
                 plantSymbol = "P";  // Specific symbol for Peashooters
             }
-            grid[plant.x][plant.y] = plantSymbol;
+            grid[plant.getX()][plant.getY()] = plantSymbol;
         }
 
         // Place zombies on the grid
@@ -128,7 +129,7 @@ public class GameMap {
 
     public Plant getPlant(int x, int y) {
         for (Plant plant : plants) {
-            if (plant.x == x && plant.y == y) {
+            if (plant.getX() == x && plant.getY() == y) {
                 return plant;
             }
         }

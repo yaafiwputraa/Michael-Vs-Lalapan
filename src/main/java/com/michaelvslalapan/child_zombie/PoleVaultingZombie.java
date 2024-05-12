@@ -3,12 +3,14 @@ package main.java.com.michaelvslalapan.child_zombie;
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.Interface.VaultingInterface;
+import main.java.com.michaelvslalapan.Map.GameMap;
 
 public class PoleVaultingZombie extends Zombie implements VaultingInterface {
     private boolean hasVaulted;
+    private GameMap gameMap;
 
     public PoleVaultingZombie() {
-        super("Pole Vaulting Zombie", 175, 100, 1, false, false, 0, 0);
+        super("Pole Vaulting Zombie", 175, 100, 1, false, x, y);
         this.hasVaulted = false;
     }
 
