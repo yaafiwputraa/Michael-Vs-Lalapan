@@ -1,4 +1,4 @@
-package main.java.com.michaelvslalapan.Map;
+package main.java.com.michaelvslalapan;
 import java.util.ArrayList;
 import java.util.List;
 
