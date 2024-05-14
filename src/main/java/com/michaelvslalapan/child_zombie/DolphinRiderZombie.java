@@ -3,44 +3,41 @@ package main.java.com.michaelvslalapan.child_zombie;
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.Interface.VaultingInterface;
+import main.java.com.michaelvslalapan.GameMap;
 
 public class DolphinRiderZombie extends Zombie implements VaultingInterface {
-    private boolean hasVaulted;
+    private boolean vaulted;
 
-    public DolphinRiderZombie() {
-        super("Dolphin Rider Zombie", 175, 100, 1, true, false, 0,0);
-        this.hasVaulted = false;
-    }
-
-    @Override
-    public boolean isAquatic() {
-        // DolphinRiderZombie is aquatic, so this method always returns true
-        return this.is_aquatic;
-    }
-
-    @Override
-    public boolean isSlowed() {
-        return this.is_slowed;
-    }
-
-    @Override
-    public Zombie createZombie() {
-        return new DolphinRiderZombie();
-    }
-
-    @Override
-    public void attackPlant(Plant plant){
-        plant.reduceHealth(getAttackDamage());
+    public DolphinRiderZombie(GameMap gameMap) {
+        super("Dolphin Rider Zombie", 125, 50, 1, true, 0, 0, 2, gameMap); // Assuming speed is 2 for Dolphin Rider
+        this.vaulted = false;
     }
 
     @Override
     public void vault() {
-        // SEMENTARA
-        this.hasVaulted = true;
+        if (!vaulted && gameMap.getPlant(getX(), getY()) != null) {
+            setX(getX() + 1); // Move forward by one tile
+            this.vaulted = true;
+        }
     }
 
     @Override
     public boolean getVaulted() {
-        return this.hasVaulted;
+        return vaulted;
+    }
+
+    @Override
+    public void excecute() {
+        if (isZombieBergerak()) {
+            if (!vaulted) {
+                vault();
+            } else {
+                super.bergerak();
+            }
+        }
+        Plant target = gameMap.getPlant(getX(), getY());
+        if (target != null) {
+            attack_plant(target);
+        }
     }
 }
