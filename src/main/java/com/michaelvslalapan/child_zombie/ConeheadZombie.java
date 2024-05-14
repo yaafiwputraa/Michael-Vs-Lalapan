@@ -26,4 +26,9 @@ public class ConeheadZombie extends Zombie {
             attack_plant(target);
         }
     }
+    public static void main(String[] args) {
+        GameMap gameMap = new GameMap(11, 6);
+        ConeheadZombie myconeheadzombie = new ConeheadZombie(3, 4, gameMap);
+        myconeheadzombie.displayZombie();
+    }
 }

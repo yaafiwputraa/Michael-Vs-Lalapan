@@ -34,4 +34,7 @@ abstract class Sun{
         totalSun += amount;
         System.out.println("Increased " + amount + " Sun! Total sun: "+ totalSun);
     }
+    public static void main(String[] args) {
+        System.out.println(getSun());
+    }
 }

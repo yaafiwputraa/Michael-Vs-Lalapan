@@ -39,6 +39,11 @@ public class Sunflower extends Plant {
             }
         }, 0, 3000);
     }
+    public static void main(String[] args) {
+        GameMap gameMap = new GameMap(11, 6);
+        Sunflower mySunflower = new Sunflower(2, 2, gameMap);
+        mySunflower.displayPlant();
+    }
     
    
 }
