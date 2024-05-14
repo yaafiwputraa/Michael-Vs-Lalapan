@@ -2,13 +2,13 @@ package main.java.com.michaelvslalapan.child_plant;
 import java.util.List;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.AbstractClass.Zombie;
+import main.java.com.michaelvslalapan.GameMap;
+
 public class Repeater extends Plant {
-    private GameMap gameMap;
 
     public Repeater(int x, int y, GameMap gameMap) {
-        super(150, 100, 50, 3, -1, 20, x, y);  // Initialize with specified attributes
-        this.gameMap = gameMap;
+        super("Repeater", 200, 50, 8, false, x, y, 200, -1, 20, gameMap);  // Initialize with specified attributes
     }
 
     @Override
@@ -19,14 +19,26 @@ public class Repeater extends Plant {
         if (!targets.isEmpty()) {
             for (Zombie zombie : targets) {
                 if (zombie.isAlive()) {
-                    zombie.takeDamage(attackDamage);
+                    zombie.takeDamage(getAttackDamage());
                 }
             }
         }
     }
-
     @Override
     public boolean isAttackingType() {
         return true; // Repeater is an attacking type plant
+    }
+
+    @Override
+    public void reduceHealth(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            health = 0;
+        }
+    }
+    public static void main(String[] args) {
+        GameMap gameMap = new GameMap(11, 6);
+        Repeater myRepeater = new Repeater(3, 4, gameMap);
+        myRepeater.displayPlant();
     }
 }

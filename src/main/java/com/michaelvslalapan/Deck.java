@@ -19,6 +19,10 @@ public class Deck {
         return deckPlants.isEmpty();
     }
 
+    public boolean isFull() {
+       return deckPlants.size() == 6;
+    }
+
     public boolean isSlotEmpty(int p){
         return deckPlants.get(p) == null;
     }
@@ -36,17 +40,17 @@ public class Deck {
     }
         
     public boolean canStartGame() {
-        return !deckPlants.isEmpty(); // cek jika deck ga kosong
+        return isFull(); // cek jika deck full mentok --> 6 biji di dlmny
     }
-    /* utk di main nnti 
-    public void startGame(Deck deck) {
+    /* utk di main nnti */
+    public void startGameDeck(Deck deck) {
         if (deck.canStartGame()) {
             System.out.println("Permainan dimulai!");
-        } else {
-            System.out.println("Tidak dapat memulai permainan, deck kosong!");
+        } 
+        else {
+            System.out.println("Tidak dapat memulai permainan karena deck belum penuh!");
         }
     }
-    */
 
 
     

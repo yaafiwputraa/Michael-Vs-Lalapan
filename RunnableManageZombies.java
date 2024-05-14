@@ -1,5 +1,5 @@
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.GameMap;
 
 public class RunnableManageZombies implements Runnable {
     private GameMap gameMap;

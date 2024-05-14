@@ -1,36 +1,24 @@
 package main.java.com.michaelvslalapan.child_zombie;
 
-import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 
 public class BucketheadZombie extends Zombie {
-    public BucketheadZombie() {
-        super("Buckethead Zombie", 300, 100, 1, false, false, x, y);
+    public BucketheadZombie(int x, int y, GameMap gameMap) {
+        super("Buckethead Zombie", 300, 100, 1, false, x, y, 5, gameMap);
     }
 
     @Override
-    public boolean isAquatic() {
-        return super.isAquatic();
-    }
-
-    @Override
+    
     public boolean isSlowed() {
         return super.isSlowed();
     }
 
-    @Override
-    public Zombie createZombie() {
-        return new BucketheadZombie();
+    public static void main(String[] args) {
+        GameMap gameMap = new GameMap(11, 6);
+        BucketheadZombie mybucketheadzombie = new BucketheadZombie(3, 4, gameMap);
+        mybucketheadzombie.displayZombie();
     }
+}
 
-    @
-        }
-
-	@Override
-	public void excecute() {
-		
-	}
-
-   
-    }
 

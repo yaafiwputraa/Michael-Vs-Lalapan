@@ -8,9 +8,9 @@ public abstract class GameEntity {
     protected int attack_damage;
     protected int attack_speed;
     protected boolean isAquatic;
-    private int x;
-    private int y;
-    private GameMap gameMap;
+    protected int x;
+    protected int y;
+    protected GameMap gameMap;
     
     public GameEntity(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, GameMap gameMap) {
         this.name = name;

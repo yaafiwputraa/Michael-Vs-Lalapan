@@ -3,11 +3,11 @@ package main.java.com.michaelvslalapan.child_plant;
 import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 
-public class Lilypad extends Plant{
+public class Lilypad extends Plant {
 
-
-    public Lilypad(int x, int y) {
-        super("Lilypad", 100, 0, 0, true, x, y, 25, 0, 10);
+    public Lilypad(int x, int y, GameMap gameMap) {
+        super("Lilypad", 100, 0, 0, true, x, y, 25, 0, 10, gameMap);
+        
     }
 
     
@@ -28,12 +28,29 @@ public class Lilypad extends Plant{
 
     // testing
     public static void main(String[] args) {
-    
-        Lilypad myLilypad = new Lilypad(3, 4);
+        GameMap gameMap = new GameMap(11, 6);
+        Lilypad myLilypad = new Lilypad(3, 4, gameMap);
         myLilypad.displayPlant();
     }
 
 
+    @Override
+    public void performAction() {
+        // TODO Auto-generated method stub
+      
+    }
+    @Override
+    public boolean isAttackingType() {
+        return false;
+    }
+
+    @Override
+    public void reduceHealth(int damage) {
+        health -= damage;
+        if (health <= 0) {
+                health = 0;
+        }
+    }
 }
 
 

@@ -2,8 +2,9 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.Map.GameMap;
+
 import main.java.com.michaelvslalapan.child_plant.Peashooter;
 import main.java.com.michaelvslalapan.child_plant.Repeater;
 import main.java.com.michaelvslalapan.child_plant.Sunflower;

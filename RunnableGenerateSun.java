@@ -1,6 +1,6 @@
 import java.util.Random;
 
-import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.child_plant.Sunflower;
 
 public class RunnableGenerateSun implements Runnable {

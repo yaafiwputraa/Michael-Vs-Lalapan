@@ -46,11 +46,12 @@ public abstract class Zombie extends GameEntity {
         isSlowed = !isSlowed;
     }
     
-   // @Override
+   @Override
     public void setAttackSpeed(int attack_speed) {
         this.attack_speed = attack_speed;
     }
 
+   @Override
     public int getAttackSpeed() {
         return this.attack_speed;
     }
@@ -67,6 +68,7 @@ public abstract class Zombie extends GameEntity {
         plant.reduceHealth(getAttackDamage());
     }
 
+    @Override
     public void setHealth(int health) {
         this.health = health;
     }
@@ -120,6 +122,12 @@ public abstract class Zombie extends GameEntity {
         System.out.println("Attack damage: " + getAttackDamage());
         System.out.println("attack speed: " + getAttackSpeed());
         System.out.println("isAquatic: " + isAquatic());
+        System.out.println("isSlowed: " + isSlowed());
+
+    }
+    @Override
+    public boolean isAlive() {
+       return health > 0;
     }
 
 }

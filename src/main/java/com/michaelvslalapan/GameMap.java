@@ -1,10 +1,13 @@
-package main.java.com.michaelvslalapan.Map;
+package main.java.com.michaelvslalapan;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.com.michaelvslalapan.AbstractClass.*;
-import main.java.com.michaelvslalapan.child_plant.*;
-
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.AbstractClass.Zombie;
+import main.java.com.michaelvslalapan.child_plant.Peashooter;
+import main.java.com.michaelvslalapan.child_plant.Sunflower;
+import main.java.com.michaelvslalapan.TileType;
 
 public class GameMap {
     private List<Plant> plants = new ArrayList<>();
@@ -13,14 +16,17 @@ public class GameMap {
     private int currentTime = 0; // Total time in seconds for the game
     private int width;
     private int height;
+    private TileType[][] tile_type;
 
     public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
+        this.tile_type = new TileType[width][height];
+        initializeTileType();
     }
 
     public boolean addPlant(Plant plant) {
-        if (currentSuns >= plant.getCost() && plant.getX() >= 0 && plant.getX() < width && plant.getY() >= 0 && plant.getY() < height) {
+        if ((tile_type[plant.getX()][plant.getY()] == TileType.UMUM || tile_type[plant.getX()][plant.getY()] == TileType.POOL) && currentSuns >= plant.getCost() && plant.getX() >= 0 && plant.getX() < width && plant.getY() >= 0 && plant.getY() < height) {
             plants.add(plant);
             currentSuns -= plant.getCost();  // Deduct the cost of the plant from the current suns
             System.out.println("Plant added at (" + plant.getX() + ", " + plant.getY() + ")");
@@ -36,8 +42,31 @@ public class GameMap {
     }
 
     public void addZombie(Zombie zombie) {
-        zombies.add(zombie);
+        
+        int x = zombie.getX();
+        int y = zombie.getY();
+        TileType targetType = getTileType(x, y);
+    
+        // Cek kondisi area yang dilindungi dan spawn
+        if (targetType == TileType.PROTECTED) {
+            System.out.println("Zombie tidak bisa diletakkan di protected area.");
+            return;
+        }
+        if (targetType != TileType.SPAWN) {
+            System.out.println("Ini merupakan area muncul zombie.");
+            return;
+        }
+    
+        // Memastikan zombie ditempatkan di area yang sesuai dengan jenisnya
+        if (!zombie.isAquatic() && targetType == TileType.UMUM) {
+            zombies.add(zombie);
+            System.out.println("Zombie added at (" + x + ", " + y + ")");
+        } else {
+            System.out.println("Non aquatic zombies hanya bisa memasuki area umum.");
+        }
     }
+    
+    
 
     public List<Zombie> getZombies() {
         return zombies;  // Return the list of zombies
@@ -135,4 +164,38 @@ public class GameMap {
         }
         return null;
     }
+
+    public void initializeTileType() {
+        for (int i = 0; i < width; i++) { // default
+            for (int j = 0; j < height; j++) {
+                    tile_type[i][j] = TileType.UMUM;
+            }
+        }
+        
+        for (int i = 1; i <= 9; i++) {
+            for (int j=2; j <= 3; j++) {
+                tile_type[i][j] = TileType.POOL;
+            }
+        }
+
+        for (int j = 0; j < height; j++) {
+            tile_type[0][j] = TileType.PROTECTED;
+        }
+
+        for (int j = 0; j < height; j++) {
+            tile_type[10][j] = TileType.SPAWN;
+        }
+        
+    }
+    
+    public TileType getTileType(int x, int y) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            return tile_type[x][y];
+        }
+        else {
+            return null;
+        }
+    }
+
+    
 }

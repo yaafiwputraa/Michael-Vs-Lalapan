@@ -18,8 +18,8 @@ public abstract class Plant extends GameEntity {
         this.nextActionTime = (long) (System.currentTimeMillis() + (attack_speed * 1000)); // delay tanaman nyerang
     }
 
-    //public abstract void performAction();  
-    //public abstract boolean isAttackingType();  
+    public abstract void performAction();  
+    public abstract boolean isAttackingType();  
 
     public int getCost() {
         return cost;
@@ -86,5 +86,6 @@ public abstract class Plant extends GameEntity {
         System.out.println("cooldown: " + getCooldown());
         System.out.println("isAquatic: " + isAquatic());
     }
+    
 }
 

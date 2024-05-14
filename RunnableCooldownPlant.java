@@ -1,4 +1,4 @@
-import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.GameMap;
 
 public class RunnableCooldownPlant implements Runnable {
     private GameMap gameMap;
