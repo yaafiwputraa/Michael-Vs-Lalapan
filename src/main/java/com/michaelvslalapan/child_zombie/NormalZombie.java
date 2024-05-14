@@ -6,8 +6,8 @@ import main.java.com.michaelvslalapan.GameMap;
 
 public class NormalZombie extends Zombie {
 
-    public NormalZombie(GameMap gameMap) {
-        super("Normal Zombie", 125, 50, 1, false, 0, 0, 1, gameMap);
+    public NormalZombie(int x, int y, GameMap gameMap) {
+        super("Normal Zombie", 125, 50, 1, false, x, y, 5, gameMap);
     }
 
     @Override

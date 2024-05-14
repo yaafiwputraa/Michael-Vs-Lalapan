@@ -33,23 +33,9 @@ public abstract class Plant extends GameEntity {
         return cooldown; 
     }
 
-    public long getNextActionTime() {
-        return nextActionTime;
-    }
-
-    public void reduceHealth(int damage) {
-        health -= damage;
-        if (health <= 0) {
-            health = 0;
-        }
-    }
-
-    public boolean isAlive() {
+    @Override
+    public boolean isAlive(){
         return health > 0;
-    }
-
-    public void setNextActionTime(long nextActionTime) {
-        this.nextActionTime = nextActionTime;
     }
 
     public boolean isAbleToPlant() {

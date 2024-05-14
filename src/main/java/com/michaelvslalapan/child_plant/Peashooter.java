@@ -25,7 +25,7 @@ public class Peashooter extends Plant {
     }
 
     @Override
-    public void reduceHealth(int damage) {
+    public void decreaseHealth(int damage) {
         health -= damage;
         if (health <= 0) {
             health = 0;

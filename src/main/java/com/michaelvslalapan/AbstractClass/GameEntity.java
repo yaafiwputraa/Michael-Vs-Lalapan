@@ -1,6 +1,7 @@
 package main.java.com.michaelvslalapan.AbstractClass;
 
 import main.java.com.michaelvslalapan.GameMap;
+import main.java.com.michaelvslalapan.Interface.Excecute;
 
 public abstract class GameEntity {
     protected String name;
@@ -84,5 +85,7 @@ public abstract class GameEntity {
         return y;
     }
 
-   
+    public boolean isAlive() {
+        return health > 0;
+    }
 }

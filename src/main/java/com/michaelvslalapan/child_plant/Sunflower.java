@@ -11,7 +11,6 @@ public class Sunflower extends Plant {
     public Sunflower(int x, int y, GameMap gameMap) {
         super("Sunflower", 100, 0, 0, false, x, y, 50, 0, 10, gameMap);
         //public Plant(String name, int health, int attack_damage, int attack_speed, GameMap tile, boolean isAquatic, int x, int y, int cost, int range, int cooldown) {
-       
     }
 
     @Override
@@ -23,6 +22,23 @@ public class Sunflower extends Plant {
         return false;
     }
     
-    
+    @Override
+    public void decreaseHealth(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            health = 0;
+        }
+    }
 
+    public void generateSunflowerProduction() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                performAction();
+            }
+        }, 0, 3000);
+    }
+    
+   
 }

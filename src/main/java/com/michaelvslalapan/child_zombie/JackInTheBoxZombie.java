@@ -9,8 +9,8 @@ import main.java.com.michaelvslalapan.Interface.Explode;
 public class JackInTheBoxZombie extends Zombie implements Explode {
     private boolean exploded;
 
-    public JackInTheBoxZombie(GameMap gameMap) {
-        super("Jack-in-the-Box Zombie", 150, 50, 1, false, 0, 0, 1, gameMap);
+    public JackInTheBoxZombie(int x, int y, GameMap gameMap) {
+        super("Jack-in-the-Box Zombie", 150, 50, 1, false, x, y, 5, gameMap);
         this.exploded = false;
     }
 

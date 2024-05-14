@@ -1,4 +1,5 @@
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.GameMap;
 
 public class RunnableManageZombies implements Runnable {
@@ -18,7 +19,7 @@ public class RunnableManageZombies implements Runnable {
                         // Check for a plant at the zombie's current location
                         Plant plant = gameMap.getPlant(zombie.getX(), zombie.getY());
                         if (plant != null) {
-                            zombie.attack(plant);
+                            zombie.attack_plant(plant);
                             if (plant.getHealth() <= 0) {
                                 gameMap.removePlant(plant.getX(), plant.getY()); // Remove the dead plant
                                 System.out.println("Zombie at (" + zombie.getX() + ", " + zombie.getY() + ") destroyed the plant and moves on.");
@@ -26,7 +27,7 @@ public class RunnableManageZombies implements Runnable {
                         }
                         // Move zombie forward if no plant is in the way or the plant is dead
                         if (plant == null || plant.getHealth() <= 0) {
-                            zombie.move();
+                            zombie.bergerak();
                             System.out.println("Zombie moves to (" + zombie.getX() + ", " + zombie.getY() + ")");
                         }
                     }

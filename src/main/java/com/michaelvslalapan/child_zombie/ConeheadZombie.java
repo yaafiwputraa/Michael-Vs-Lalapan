@@ -1,13 +1,17 @@
 package main.java.com.michaelvslalapan.child_zombie;
 
-import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.GameMap;
+import main.java.com.michaelvslalapan.AbstractClass.*;
 
 public class ConeheadZombie extends Zombie {
+    public ConeheadZombie(int x, int y, GameMap gameMap) {
+        super("Conehead Zombie", 250, 100, 1,false, x, y, 5, gameMap);
 
-    public ConeheadZombie(GameMap gameMap) {
-        super("Conehead Zombie", 150, 50, 1, false, 0, 0, 1, gameMap);
+    }
+
+    @Override
+    public boolean isSlowed() {
+        return super.isSlowed();
     }
 
     @Override
@@ -15,7 +19,9 @@ public class ConeheadZombie extends Zombie {
         if (isZombieBergerak()) {
             super.bergerak();
         }
+
         Plant target = gameMap.getPlant(getX(), getY());
+
         if (target != null) {
             attack_plant(target);
         }

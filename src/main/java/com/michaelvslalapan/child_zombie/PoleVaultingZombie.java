@@ -8,8 +8,8 @@ import main.java.com.michaelvslalapan.GameMap;
 public class PoleVaultingZombie extends Zombie implements VaultingInterface {
     private boolean vaulted;
 
-    public PoleVaultingZombie(GameMap gameMap) {
-        super("Pole Vaulting Zombie", 175, 50, 1, false, 0, 0, 2, gameMap); // Assuming speed is 2 for Pole Vaulting Zombie
+    public PoleVaultingZombie(int x, int y, GameMap gameMap) {
+        super("Pole Vaulting Zombie", 175, 50, 1, false, x, y, 5, gameMap); // Assuming speed is 2 for Pole Vaulting Zombie
         this.vaulted = false;
     }
 

@@ -22,17 +22,5 @@ public class BucketheadZombie extends Zombie {
         mybucketheadzombie.displayZombie();
     }
 
-/* 
-    @Override
-    public void execute() {
-        if (isZombieBergerak()) {
-            super.bergerak();
-        }
-        
-        Plant target = gameMap.getPlant(getX(), getY());
-        
-        if (target != null) {
-            attack_plant(target);
-        }
-        */
 }
+

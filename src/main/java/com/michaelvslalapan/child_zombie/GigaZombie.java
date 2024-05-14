@@ -6,8 +6,8 @@ import main.java.com.michaelvslalapan.GameMap;
 
 public class GigaZombie extends Zombie {
 
-    public GigaZombie(GameMap gameMap) {
-        super("GigaZombie", 400, 500, 4, false, 0, 0, 1, gameMap);
+    public GigaZombie(int x, int y, GameMap gameMap) {
+        super("GigaZombie", 400, 500, 4, false, x, y, 5, gameMap);
     }
 
     @Override

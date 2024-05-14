@@ -8,8 +8,8 @@ import main.java.com.michaelvslalapan.GameMap;
 public class DolphinRiderZombie extends Zombie implements VaultingInterface {
     private boolean vaulted;
 
-    public DolphinRiderZombie(GameMap gameMap) {
-        super("Dolphin Rider Zombie", 125, 50, 1, true, 0, 0, 2, gameMap); // Assuming speed is 2 for Dolphin Rider
+    public DolphinRiderZombie(int x, int y, GameMap gameMap) {
+        super("Dolphin Rider Zombie", 125, 50, 1, true, x, y, 5, gameMap); // Assuming speed is 2 for Dolphin Rider
         this.vaulted = false;
     }
 

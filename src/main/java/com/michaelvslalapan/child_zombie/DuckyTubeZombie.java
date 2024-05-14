@@ -8,8 +8,8 @@ import main.java.com.michaelvslalapan.GameMap;
 
 public class DuckyTubeZombie extends Zombie {
 
-    public DuckyTubeZombie(GameMap gameMap) {
-        super("DuckyTubeZombie", 100, 100, 1, true, 0, 0, 1, gameMap);
+    public DuckyTubeZombie(int x, int y, GameMap gameMap) {
+        super("DuckyTubeZombie", 100, 100, 1, true, x, y, 5, gameMap);
     }
 
     @Override

@@ -4,9 +4,10 @@ import java.util.concurrent.*;
 import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.TileType;
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.Interface.Excecute;
 
 
-public abstract class Zombie extends GameEntity {
+public abstract class Zombie extends GameEntity implements Excecute{
     private int speed;
     private boolean isZombieBergerak;
     private boolean isSlowed;
@@ -65,7 +66,7 @@ public abstract class Zombie extends GameEntity {
         }
     }
     public void attack_plant(Plant plant){
-        plant.reduceHealth(getAttackDamage());
+        plant.decreaseHealth(attack_damage);
     }
 
     @Override
@@ -130,4 +131,16 @@ public abstract class Zombie extends GameEntity {
        return health > 0;
     }
 
+    public void excecute() {
+       
+        if (isZombieBergerak()) {
+            bergerak();
+        }
+        
+        Plant target = gameMap.getPlant(getX(), getY());
+        
+        if (target != null) {
+            attack_plant(target);
+        }
+    }
 }

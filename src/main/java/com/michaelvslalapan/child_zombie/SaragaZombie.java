@@ -7,8 +7,8 @@ import main.java.com.michaelvslalapan.GameMap;
 public class SaragaZombie extends Zombie {
     private boolean isDived;
 
-    public SaragaZombie(GameMap gameMap) {
-        super("Snorkel Zombie", 125, 50, 1, true, 0, 0, 1, gameMap);
+    public SaragaZombie(int x, int y, GameMap gameMap) {
+        super("Snorkel Zombie", 125, 50, 1, true, x, y, 5, gameMap);
         this.isDived = false;
     }
 
