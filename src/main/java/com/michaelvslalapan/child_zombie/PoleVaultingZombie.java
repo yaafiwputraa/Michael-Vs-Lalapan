@@ -3,49 +3,41 @@ package main.java.com.michaelvslalapan.child_zombie;
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
 import main.java.com.michaelvslalapan.Interface.VaultingInterface;
-import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.GameMap;
 
 public class PoleVaultingZombie extends Zombie implements VaultingInterface {
-    private boolean hasVaulted;
-    private GameMap gameMap;
+    private boolean vaulted;
 
-    public PoleVaultingZombie() {
-        super("Pole Vaulting Zombie", 175, 100, 1, false, x, y);
-        this.hasVaulted = false;
-    }
-
-    @Override
-    public boolean isAquatic() {
-        return this.is_aquatic;
-    }
-
-    @Override
-    public boolean isSlowed() {
-        return this.is_slowed;
-    }
-
-    @Override
-    public Zombie createZombie() {
-        return new PoleVaultingZombie();
-    }
-
-    @Override
-    public void attackPlant(Plant plant){
-        plant.reduceHealth(getAttackDamage());
+    public PoleVaultingZombie(GameMap gameMap) {
+        super("Pole Vaulting Zombie", 175, 50, 1, false, 0, 0, 2, gameMap); // Assuming speed is 2 for Pole Vaulting Zombie
+        this.vaulted = false;
     }
 
     @Override
     public void vault() {
-        if (getX() > 0) {
-            if 
-            setX(getX() - 2); // Move zombie one step to the left
+        if (!vaulted && gameMap.getPlant(getX(), getY()) != null) {
+            setX(getX() + 1); // Move forward by one tile
+            this.vaulted = true;
         }
-        this.hasVaulted = true;
     }
-
 
     @Override
     public boolean getVaulted() {
-        return this.hasVaulted;
+        return vaulted;
+    }
+
+    @Override
+    public void excecute() {
+        if (isZombieBergerak()) {
+            if (!vaulted) {
+                vault();
+            } else {
+                super.bergerak();
+            }
+        }
+        Plant target = gameMap.getPlant(getX(), getY());
+        if (target != null) {
+            attack_plant(target);
+        }
     }
 }

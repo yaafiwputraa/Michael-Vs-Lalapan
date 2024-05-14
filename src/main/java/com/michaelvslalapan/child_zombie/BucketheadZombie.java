@@ -1,7 +1,9 @@
 package main.java.com.michaelvslalapan.child_zombie;
 
 import main.java.com.michaelvslalapan.GameMap;
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
+import main.java.com.michaelvslalapan.GameMap;
 
 public class BucketheadZombie extends Zombie {
     public BucketheadZombie(int x, int y, GameMap gameMap) {
@@ -19,6 +21,18 @@ public class BucketheadZombie extends Zombie {
         BucketheadZombie mybucketheadzombie = new BucketheadZombie(3, 4, gameMap);
         mybucketheadzombie.displayZombie();
     }
+
+/* 
+    @Override
+    public void execute() {
+        if (isZombieBergerak()) {
+            super.bergerak();
+        }
+        
+        Plant target = gameMap.getPlant(getX(), getY());
+        
+        if (target != null) {
+            attack_plant(target);
+        }
+        */
 }
-
-

@@ -1,30 +1,25 @@
+
+
 package main.java.com.michaelvslalapan.child_zombie;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
+import main.java.com.michaelvslalapan.GameMap;
 
 public class DuckyTubeZombie extends Zombie {
-    public DuckyTubeZombie() {
-        super("Ducky Tube Zombie", 100, 100, 1, true, false,0,0);
+
+    public DuckyTubeZombie(GameMap gameMap) {
+        super("DuckyTubeZombie", 100, 100, 1, true, 0, 0, 1, gameMap);
     }
 
     @Override
-    public boolean isAquatic() {
-        return this.is_aquatic;
-    }
-
-    @Override
-    public boolean isSlowed() {
-        return this.is_slowed;
-    }
-
-    @Override
-    public Zombie createZombie() {
-        return new DuckyTubeZombie();
-    }
-
-    @Override
-    public void attackPlant(Plant plant){
-        plant.reduceHealth(getAttackDamage());
+    public void excecute() {
+        if (isZombieBergerak()) {
+            super.bergerak();
+        }
+        Plant target = gameMap.getPlant(getX(), getY());
+        if (target != null) {
+            attack_plant(target);
+        }
     }
 }

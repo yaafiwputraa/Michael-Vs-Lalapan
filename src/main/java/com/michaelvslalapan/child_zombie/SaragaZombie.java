@@ -2,31 +2,51 @@ package main.java.com.michaelvslalapan.child_zombie;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
-import main.java.com.michaelvslalapan.Map.GameMap;
+import main.java.com.michaelvslalapan.GameMap;
 
 public class SaragaZombie extends Zombie {
-    private GameMap gameMap;
+    private boolean isDived;
 
-    public SaragaZombie() {
-        super("Normal Zombie", 125, 100, 1, false, false, x, y);
+    public SaragaZombie(GameMap gameMap) {
+        super("Snorkel Zombie", 125, 50, 1, true, 0, 0, 1, gameMap);
+        this.isDived = false;
+    }
+
+    public void dive() {
+        if (!isDived) {
+            System.out.println(getName() + " is diving!");
+            isDived = true;
+            // Adjust behavior for diving, e.g., avoid attacks
+        }
+    }
+
+    public void emerge() {
+        if (isDived) {
+            System.out.println(getName() + " is emerging!");
+            isDived = false;
+            // Adjust behavior for emerging, e.g., become attackable
+        }
     }
 
     @Override
-    public boolean isAquatic() {
-        return this.is_aquatic;
+    public void excecute() {
+        if (isZombieBergerak()) {
+            if (!isDived) {
+                dive();
+            } else if (isDived) {
+                emerge();
+            } else {
+                super.bergerak();
+            }
+        }
+        if (!isDived) {
+            Plant target = gameMap.getPlant(getX(), getY());
+            if (target != null) {
+                attack_plant(target);
+            }
+        }
     }
 
-    @Override
-    public boolean isSlowed() {
-        return this.is_slowed;
-    }
-    @Override
-    public void attackPlant(Plant plant){
-        plant.reduceHealth(getAttackDamage());
-    }
     
-    @Override
-    public Zombie createZombie() {
-        return new SaragaZombie();
-    }
+    
 }

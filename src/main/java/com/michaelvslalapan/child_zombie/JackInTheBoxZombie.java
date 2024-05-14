@@ -2,42 +2,37 @@ package main.java.com.michaelvslalapan.child_zombie;
 
 import main.java.com.michaelvslalapan.AbstractClass.Plant;
 import main.java.com.michaelvslalapan.AbstractClass.Zombie;
+import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.Interface.Explode;
 
+
 public class JackInTheBoxZombie extends Zombie implements Explode {
-    private boolean hasExploded;
+    private boolean exploded;
 
-    public JackInTheBoxZombie() {
-        super("JackInTheBox", 125, 1000, 1, false, false,0,0);
-        this.hasExploded = false;
-    }
-
-    @Override
-    public boolean isAquatic() {
-        return this.is_aquatic;
-    }
-
-    @Override
-    public boolean isSlowed() {
-        return this.is_slowed;
-    }
-
-    @Override
-    public Zombie createZombie() {
-        return new JackInTheBoxZombie();
+    public JackInTheBoxZombie(GameMap gameMap) {
+        super("Jack-in-the-Box Zombie", 150, 50, 1, false, 0, 0, 1, gameMap);
+        this.exploded = false;
     }
 
     @Override
     public boolean isExploded() {
-        return this.hasExploded;
-    }
-
-    @Override
-    public void attackPlant(Plant plant){
-        plant.reduceHealth(getAttackDamage());
+        return exploded;
     }
 
     public void explode() {
-        this.hasExploded = true;
+        // Implement explosion logic here
+        this.exploded = true;
+       
+    }
+
+    @Override
+    public void excecute() {
+        if (isZombieBergerak() && !isExploded()) {
+            super.bergerak();
+        }
+        Plant target = gameMap.getPlant(getX(), getY());
+        if (target != null && !isExploded()) {
+            explode();
+        }
     }
 }
