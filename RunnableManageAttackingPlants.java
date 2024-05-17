@@ -1,6 +1,3 @@
-import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.GameMap;
-
 public class RunnableManageAttackingPlants implements Runnable {
     private GameMap gameMap;
 
@@ -21,6 +18,7 @@ public class RunnableManageAttackingPlants implements Runnable {
                         plant.setNextActionTime(currentTime + plant.getAttackSpeed() * 1000); // Schedule next action
                     }
                 }
+                gameMap.removeDeadZombie(null);
                 Thread.sleep(checkInterval);
             }
         } catch (InterruptedException e) {

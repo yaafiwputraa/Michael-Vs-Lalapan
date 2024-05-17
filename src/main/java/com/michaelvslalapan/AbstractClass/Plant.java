@@ -60,6 +60,13 @@ public abstract class Plant extends GameEntity {
         prev_time = System.currentTimeMillis();
         System.out.printf("%s telah ditanam pada (%d, %d)\n", name, x, y);
     }
+    public long getNextActionTime() {
+        return nextActionTime;
+    }
+
+    public void setNextActionTime(long nextActionTime) {
+        this.nextActionTime = nextActionTime;
+    }
     
     //public abstract void excecute();
     public void displayPlant() {

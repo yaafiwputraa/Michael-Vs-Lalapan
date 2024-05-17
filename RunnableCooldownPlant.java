@@ -1,22 +1,23 @@
-import main.java.com.michaelvslalapan.GameMap;
-
 public class RunnableCooldownPlant implements Runnable {
-    private GameMap gameMap;
-    private int checkInterval = 1000; // Check every second
+    private Deck deck;
 
-    public RunnableCooldownPlant(GameMap gameMap) {
-        this.gameMap = gameMap;
+    public RunnableCooldownPlant(Deck deck) {
+        this.deck = deck;
     }
 
     @Override
     public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                // Implement logic to handle plant cooldowns
-                Thread.sleep(checkInterval);
+                Thread.sleep(1000); // Sleep for 1 second before updating cooldowns
+                for (Plant plant : deck.getDeckPlants()) {
+                    if (plant.getRemainingCooldown() > 0) {
+                        plant.reduceCooldown(); // Reduce the cooldown by 1 second
+                    }
+                }
             }
         } catch (InterruptedException e) {
-            System.out.println("Plant cooldown management thread interrupted");
+            System.out.println("Cooldown management thread was interrupted.");
         }
     }
 }

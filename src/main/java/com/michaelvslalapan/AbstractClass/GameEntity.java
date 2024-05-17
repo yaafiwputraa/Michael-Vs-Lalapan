@@ -3,7 +3,7 @@ package main.java.com.michaelvslalapan.AbstractClass;
 import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.Interface.Excecute;
 
-public abstract class GameEntity {
+public abstract class GameEntity implements Excecute {
     protected String name;
     protected int health;
     protected int attack_damage;
@@ -89,3 +89,5 @@ public abstract class GameEntity {
         return health > 0;
     }
 }
+
+

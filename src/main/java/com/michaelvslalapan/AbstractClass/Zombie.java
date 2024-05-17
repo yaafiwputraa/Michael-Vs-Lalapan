@@ -1,28 +1,24 @@
 package main.java.com.michaelvslalapan.AbstractClass;
-import java.util.concurrent.*;
 
+import java.util.concurrent.*;
 import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.TileType;
-import main.java.com.michaelvslalapan.AbstractClass.Plant;
-import main.java.com.michaelvslalapan.Interface.Excecute;
 
-
-public abstract class Zombie extends GameEntity implements Excecute{
+public abstract class Zombie extends GameEntity {
     private int speed;
     private boolean isZombieBergerak;
     private boolean isSlowed;
     private ScheduledExecutorService timer;
     private ScheduledFuture<?> scheduledFuture;
 
-
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int speed, GameMap gameMap) {        
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int speed, GameMap gameMap) {
         super(name, health, attack_damage, attack_speed, isAquatic, x, y, gameMap);
-        this.isSlowed = false; // scr default zombie ga slow kalo ga kena snowpea
-        this.isZombieBergerak = true; // scr default zombie bergerak, akan stop sbntr kalo kena snowpea
+        this.isSlowed = false; // Default: zombie is not slowed
+        this.isZombieBergerak = true; // Default: zombie is moving
+        this.speed = speed;
         timer = Executors.newSingleThreadScheduledExecutor();
-        
     }
-       
+
     public void setSpeed(int speed) {
         this.speed = speed;
     }
@@ -34,9 +30,9 @@ public abstract class Zombie extends GameEntity implements Excecute{
     public boolean isZombieBergerak() {
         return isZombieBergerak;
     }
-    
+
     public void setIsZombieBergerak() {
-        isZombieBergerak = !isZombieBergerak; 
+        isZombieBergerak = !isZombieBergerak;
     }
 
     public boolean isSlowed() {
@@ -46,27 +42,27 @@ public abstract class Zombie extends GameEntity implements Excecute{
     public void setIsSlowed() {
         isSlowed = !isSlowed;
     }
-    
-   @Override
+
+    @Override
     public void setAttackSpeed(int attack_speed) {
         this.attack_speed = attack_speed;
     }
 
-   @Override
+    @Override
     public int getAttackSpeed() {
         return this.attack_speed;
     }
 
     public void cekBergerak() {
-        if (!isSlowed) { // Cek apkh !isSLowed = true --> yg brrti mmg benar bahwa isSlowed = false (zombie sdg tdk melambat)
-            isZombieBergerak = true; 
-        }
-        else {
-            isZombieBergerak = false; 
+        if (!isSlowed) {
+            isZombieBergerak = true;
+        } else {
+            isZombieBergerak = false;
         }
     }
-    public void attack_plant(Plant plant){
-        plant.decreaseHealth(attack_damage);
+
+    public void attackPlant(Plant plant) {
+        plant.decreaseHealth(getAttackDamage());
     }
 
     @Override
@@ -82,23 +78,20 @@ public abstract class Zombie extends GameEntity implements Excecute{
     }
 
     public void bergerak() {
-        
         if (getX() > 0) {
             setX(getX() - 1); // Move zombie one step to the left
-        
         }
-
     }
 
     public void struckBySnowPea() {
-       if (!isSlowed) { 
+        if (!isSlowed) {
             isSlowed = true;
             setSpeed(getSpeed() / 2);
             setAttackSpeed(getAttackSpeed() / 2);
 
-        // Efek ini hanya bertahan selama 3 detik kalo si zombie sdh tdk lg ditembak oleh snowpea.
+            // Effect lasts for 3 seconds unless hit again
             if (scheduledFuture != null && !scheduledFuture.isDone()) {
-                scheduledFuture.cancel(false); // Batalin eksekusi yang tertunda jika ada
+                scheduledFuture.cancel(false); // Cancel any pending executions
             }
             scheduledFuture = timer.schedule(this::finishedStruckBySnowPea, 3, TimeUnit.SECONDS);
         }
@@ -107,40 +100,37 @@ public abstract class Zombie extends GameEntity implements Excecute{
     public void finishedStruckBySnowPea() {
         if (isSlowed) {
             isSlowed = false;
-            setSpeed(getSpeed() * 2); // Mengembalikan speed 
-            setAttackSpeed(getAttackSpeed() * 2); // Mengembalikan attack_speed
+            setSpeed(getSpeed() * 2); // Restore speed
+            setAttackSpeed(getAttackSpeed() * 2); // Restore attack speed
         }
     }
-    
-    public void shutdown() { // Mematikan executor ketika tdk lg dibutuhkan
-            timer.shutdown(); 
-            // untuk menutup executor. PASTIKAN method ini dipanggil ketika Zombie dihapus dari game atau ketika game berakhir.
+
+    public void shutdown() { // Shutdown executor when no longer needed
+        timer.shutdown();
     }
-    
+
     public void displayZombie() {
         System.out.println("Name: " + getName());
         System.out.println("Health: " + getHealth());
         System.out.println("Attack damage: " + getAttackDamage());
-        System.out.println("attack speed: " + getAttackSpeed());
-        System.out.println("isAquatic: " + isAquatic());
-        System.out.println("isSlowed: " + isSlowed());
-
+        System.out.println("Attack speed: " + getAttackSpeed());
+        System.out.println("Is Aquatic: " + isAquatic());
+        System.out.println("Is Slowed: " + isSlowed());
     }
+
     @Override
     public boolean isAlive() {
-       return health > 0;
+        return getHealth() > 0;
     }
 
-    public void excecute() {
-       
+    @Override
+    public void execute() {
         if (isZombieBergerak()) {
             bergerak();
         }
-        
         Plant target = gameMap.getPlant(getX(), getY());
-        
         if (target != null) {
-            attack_plant(target);
+            attackPlant(target);
         }
     }
 }

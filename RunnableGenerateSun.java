@@ -1,6 +1,5 @@
 import java.util.Random;
 
-import main.java.com.michaelvslalapan.GameMap;
 import main.java.com.michaelvslalapan.child_plant.Sunflower;
 
 public class RunnableGenerateSun implements Runnable {
@@ -24,7 +23,7 @@ public class RunnableGenerateSun implements Runnable {
                 gameMap.getAllPlants().stream()
                        .filter(p -> p instanceof Sunflower)
                        .forEach(p -> ((Sunflower)p).performAction());
-                Thread.sleep(10000); // Sunflower generates sun every 10 seconds
+                Thread.sleep(10000); 
             }
         } catch (InterruptedException e) {
             System.out.println("Sun generation interrupted.");

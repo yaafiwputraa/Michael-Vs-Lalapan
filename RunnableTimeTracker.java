@@ -1,5 +1,3 @@
-import main.java.com.michaelvslalapan.GameMap;
-
 public class RunnableTimeTracker implements Runnable {
     private GameMap gameMap;
 
