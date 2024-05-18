@@ -7,7 +7,7 @@ public class TangleKelp extends Plant {
 
     private GameMap gameMap;
     public TangleKelp(int x, int y, GameMap gameMap) {
-        super("tanglekelp",25, 100, 0, 0, 0, 10, x, y); // Assuming parameters for Plant are cost, health, attackDamage, attackSpeed, range, cooldown, x, y
+        super("tanglekelp",25, 100, 0, isAquatic, 0, 0, 10, x, y, gameMap); // Assuming parameters for Plant are cost, health, attackDamage, attackSpeed, range, cooldown, x, y
         this.gameMap = gameMap;
     }
 

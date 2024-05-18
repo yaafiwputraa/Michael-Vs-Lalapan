@@ -1,3 +1,8 @@
+package main.java.com.michaelvslalapan.Runnable;
+
+import main.java.com.michaelvslalapan.Deck;
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
+
 public class RunnableCooldownPlant implements Runnable {
     private Deck deck;
 

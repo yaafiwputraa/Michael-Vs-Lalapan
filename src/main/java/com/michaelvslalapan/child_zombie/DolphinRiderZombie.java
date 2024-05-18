@@ -37,7 +37,7 @@ public class DolphinRiderZombie extends Zombie implements VaultingInterface {
         }
         Plant target = gameMap.getPlant(getX(), getY());
         if (target != null) {
-            attack_plant(target);
+            attackPlant(target);
         }
     }
 }

@@ -1,3 +1,8 @@
+package main.java.com.michaelvslalapan.Runnable;
+import main.java.com.michaelvslalapan.GameMap;
+import main.java.com.michaelvslalapan.AbstractClass.Plant;
+import main.java.com.michaelvslalapan.AbstractClass.Zombie;
+
 import java.util.Random;
 
 public class RunnableZombieSpawn implements Runnable {

@@ -123,7 +123,7 @@ public abstract class Zombie extends GameEntity {
         return getHealth() > 0;
     }
 
-    @Override
+
     public void execute() {
         if (isZombieBergerak()) {
             bergerak();

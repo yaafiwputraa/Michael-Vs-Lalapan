@@ -8,6 +8,7 @@ public abstract class Plant extends GameEntity {
     private int cooldown;  
     private long prev_time; 
     private long nextActionTime;
+    protected int remainingCooldown;
 
     public Plant(String name, int health, int attack_damage, int attack_speed, boolean isAquatic, int x, int y, int cost, int range, int cooldown, GameMap gameMap) {
         super(name, health, attack_damage, attack_speed, isAquatic, x, y, gameMap);
@@ -38,6 +39,13 @@ public abstract class Plant extends GameEntity {
         return health > 0;
     }
 
+    public void reduceHealth(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            health = 0;
+        }
+    }
+
     public boolean isAbleToPlant() {
         long curr_time;
         long duration;
@@ -66,6 +74,33 @@ public abstract class Plant extends GameEntity {
 
     public void setNextActionTime(long nextActionTime) {
         this.nextActionTime = nextActionTime;
+    }
+
+    public void reduceCooldown() {
+        if (remainingCooldown > 0) {
+            remainingCooldown--;
+        }
+    }
+
+    public int getRemainingCooldown() {
+        return remainingCooldown;
+    }
+
+    public void resetCooldown() {
+        remainingCooldown = cooldown;
+    }
+
+    public boolean isAvailable() {
+        return remainingCooldown == 0;
+    }
+
+    public void use(){
+        this.remainingCooldown = this.cooldown;
+    }
+
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
     
     //public abstract void excecute();

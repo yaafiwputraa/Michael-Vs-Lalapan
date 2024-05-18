@@ -29,7 +29,7 @@ public class NewspaperZombie extends Zombie {
         Plant target = gameMap.getPlant(getX(), getY());
         
         if (target != null) {
-            attack_plant(target);
+            attackPlant(target);
         }
     }
 }

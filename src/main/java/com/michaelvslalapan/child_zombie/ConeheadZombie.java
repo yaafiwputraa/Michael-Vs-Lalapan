@@ -23,7 +23,7 @@ public class ConeheadZombie extends Zombie {
         Plant target = gameMap.getPlant(getX(), getY());
 
         if (target != null) {
-            attack_plant(target);
+            attackPlant(target);
         }
     }
     public static void main(String[] args) {

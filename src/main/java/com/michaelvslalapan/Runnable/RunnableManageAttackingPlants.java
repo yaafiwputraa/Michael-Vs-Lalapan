@@ -1,3 +1,6 @@
+package main.java.com.michaelvslalapan.Runnable;
+
+
 public class RunnableManageAttackingPlants implements Runnable {
     private GameMap gameMap;
 

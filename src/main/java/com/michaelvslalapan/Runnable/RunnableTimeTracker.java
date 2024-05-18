@@ -1,3 +1,6 @@
+package main.java.com.michaelvslalapan.Runnable;
+import main.java.com.michaelvslalapan.GameMap;
+
 public class RunnableTimeTracker implements Runnable {
     private GameMap gameMap;
 
