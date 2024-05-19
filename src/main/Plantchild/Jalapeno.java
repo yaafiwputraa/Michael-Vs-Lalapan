@@ -5,12 +5,19 @@ import java.util.List;
 import src.main.GameMap;
 import src.main.AbstractClass.Plant;
 import src.main.AbstractClass.Zombie;
+
 public class Jalapeno extends Plant {
 
     private GameMap gameMap;
 
+    public Jalapeno() {
+        super("jalapeno", 25, 100, 0, 0, 0, 10, 0, 0); // Parameters: name, cost, health, attackDamage, attackSpeed, range, cooldown, x, y
+    }
+
     public Jalapeno(int x, int y, GameMap gameMap) {
-        super("jalapeno", 25, 100, 0, 0, 0, 10, x, y); // Parameters: name, cost, health, attackDamage, attackSpeed, range, cooldown, x, y
+        this();
+        this.x = x;
+        this.y = y;
         this.gameMap = gameMap;
     }
 
@@ -30,5 +37,10 @@ public class Jalapeno extends Plant {
     @Override
     public boolean isAttackingType() {
         return true;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

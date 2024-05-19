@@ -1,14 +1,19 @@
 package src.main.Plantchild;
-
 import java.util.List;
-
 import src.main.GameMap;
 import src.main.AbstractClass.Plant;
 import src.main.AbstractClass.Zombie;
+
 public class Snowpea extends Plant {
     private GameMap gameMap;
+    public Snowpea() {
+        super("Snowpea", 175, 100, 25, 4, -1, 10, 0, 0);  // Initialize with the constructor of the Plant class
+    }
+
     public Snowpea(int x, int y, GameMap gameMap) {
-        super("Snowpea", 175, 100, 25, 4, -1, 10, x, y);  // Initialize with the constructor of the Plant class
+        this();
+        this.x = x;
+        this.y = y;
         this.gameMap = gameMap;
     }
 
@@ -26,5 +31,9 @@ public class Snowpea extends Plant {
 
     public boolean isAttackingType() {
         return true;  // Snowpea is an attacking type plant
+    }
+
+    public String getName() {
+        return name;
     }
 }

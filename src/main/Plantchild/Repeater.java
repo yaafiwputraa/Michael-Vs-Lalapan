@@ -8,8 +8,15 @@ import java.util.List;
 public class Repeater extends Plant {
     private GameMap gameMap;
 
+    public Repeater() {
+        super("repeater",150, 100, 50, 3, -1, 20, 0, 0);  // Initialize with specified attributes
+        
+    }
+
     public Repeater(int x, int y, GameMap gameMap) {
-        super("repeater",150, 100, 50, 3, -1, 20, x, y);  // Initialize with specified attributes
+        this();
+        this.x = x;
+        this.y = y;
         this.gameMap = gameMap;
     }
 
@@ -30,6 +37,10 @@ public class Repeater extends Plant {
     @Override
     public boolean isAttackingType() {
         return true; // Repeater is an attacking type plant
+    }
+
+    public String getName() {
+        return name;
     }
 }
 

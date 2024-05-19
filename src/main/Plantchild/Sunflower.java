@@ -6,8 +6,14 @@ import src.main.AbstractClass.Plant;
 public class Sunflower extends Plant {
     private GameMap gameMap;
 
+    public Sunflower() {
+        super("sunflower",50, 100, 0, 0, 0, 10, 0, 0);
+    }
+
     public Sunflower(int x, int y, GameMap gameMap) {
-        super("sunflower",50, 100, 0, 0, 0, 10, x, y);
+        this();
+        this.x = x;
+        this.y = y;
         this.gameMap = gameMap;
     }
 
@@ -18,6 +24,10 @@ public class Sunflower extends Plant {
 
     public boolean isAttackingType() {
         return false;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 

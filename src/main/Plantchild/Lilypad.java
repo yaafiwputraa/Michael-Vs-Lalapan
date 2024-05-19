@@ -4,8 +4,14 @@ import src.main.AbstractClass.Plant;
 
 public class Lilypad extends Plant {
     private GameMap gameMap;
+    public Lilypad() {
+        super("lilypad",25, 100, 0, 0, 0, 10, 0, 0); // Parameters: cost, health, attack_damage, attack_speed, range, cooldown, x, y
+    }
+
     public Lilypad(int x, int y, GameMap gameMap) {
-        super("lilypad",25, 100, 0, 0, 0, 10, x, y); // Parameters: cost, health, attack_damage, attack_speed, range, cooldown, x, y
+        this();
+        this.x = x;
+        this.y = y;
         this.gameMap = gameMap;
     }
 
@@ -16,6 +22,10 @@ public class Lilypad extends Plant {
 
     public boolean isAttackingType() {
         return false;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 

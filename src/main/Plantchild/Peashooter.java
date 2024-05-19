@@ -7,8 +7,14 @@ import src.main.AbstractClass.Zombie;
 public class Peashooter extends Plant {
     private GameMap gameMap;
 
+    public Peashooter() {
+        super("Peashooter", 100, 100, 25, 4, -1, 10, 0, 0);
+    }
+
     public Peashooter(int x, int y, GameMap gameMap) {
-        super("repeater",100, 100, 25, 4, -1, 10, x, y);
+        this();
+        this.x = x;
+        this.y = y;
         this.gameMap = gameMap;
     }
 
@@ -25,4 +31,9 @@ public class Peashooter extends Plant {
     public boolean isAttackingType() {
         return true;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
+

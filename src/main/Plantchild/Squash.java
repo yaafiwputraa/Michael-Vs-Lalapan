@@ -7,8 +7,14 @@ import src.main.AbstractClass.Zombie;
 public class Squash extends Plant {
 
     private GameMap gameMap;
+    public Squash() {
+        super("squash",25, 100, 1000, 0, 0, 10, 0, 0); // Assuming parameters for Plant are cost, health, attackDamage, attackSpeed, range, cooldown, x, y
+    }
+
     public Squash(int x, int y, GameMap gameMap) {
-        super("squash",25, 100, 1000, 0, 0, 10, x, y); // Assuming parameters for Plant are cost, health, attackDamage, attackSpeed, range, cooldown, x, y
+        this();
+        this.x = x;
+        this.y = y;
         this.gameMap = gameMap;
     }
 
@@ -24,5 +30,9 @@ public class Squash extends Plant {
 
     public boolean isAttackingType() {
         return true; 
+    }
+
+    public String getName() {
+        return name;
     }
 }

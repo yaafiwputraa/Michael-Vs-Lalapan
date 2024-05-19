@@ -13,7 +13,7 @@ public class GameMap {
     private boolean[][] poolArea;
     private boolean[][] baseArea;
 
-    private int currentSuns = 25;
+    private int currentSuns = 50;
     private int currentTime = 0; // Total time in seconds for the game
     private int width;
     private int height;
