@@ -3,8 +3,6 @@ package src.main;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-import src.main.Interface.*;
 import src.main.DesignPattern.*;
 import src.main.Display.*;
 
@@ -69,4 +67,3 @@ public class Main {
         }
     }
 }
-
