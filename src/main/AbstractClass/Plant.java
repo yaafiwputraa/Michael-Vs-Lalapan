@@ -5,14 +5,15 @@ import src.main.PlantType;
 
 public abstract class Plant {
     protected String name;
-    protected int cost;
+    public int cost;
     protected int health;
     protected int attackDamage;
     protected int attackSpeed;  
     protected int range;
     protected int cooldown;  
     protected int remainingCooldown;
-    protected int x, y;  
+    public int x;
+    public int y;  
     protected long nextActionTime;
     private PlantType type;
 

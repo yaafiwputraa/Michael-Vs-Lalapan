@@ -223,7 +223,7 @@ public class Game {
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_RESET = "\u001B[0m";
         if (parts.length < 4) {
-            System.out.println(ANSI_RED+"Format penanaman salah."+ANSI_RESET);
+            System.out.println("Invalid command format for planting.");
             return;
         }
         int deckIndex = Integer.parseInt(parts[1])-1;
@@ -232,13 +232,23 @@ public class Game {
 
         try {
             PlantType plantType = inventory.getDeck().getPlantTypes().get(deckIndex);
-            if (plantType != null && gameMap.addPlant(createPlant(plantType, x, y), x, y)) {
-                System.out.println("Planted " + plantType + " at (" + x + ", " + y + ").");
+            if (plantType != null) {
+                if (inventory.getDeck().isOnCooldown(plantType)) {
+                    System.out.println("Cannot plant " + plantType + ". It is on cooldown.");
+                } else {
+                    Plant plant = createPlant(plantType, x, y);
+                    if (plant != null && gameMap.addPlant(plant)) {
+                        System.out.println("Planted " + plantType + " at (" + x + ", " + y + ").");
+                        inventory.getDeck().setCooldown(plantType, System.currentTimeMillis() + plant.getCooldown() * 1000);
+                    } else {
+                        System.out.println("Failed to plant. Check suns, position, or type.");
+                    }
+                }
             } else {
-                System.out.println(ANSI_RED+"Failed to plant. Check suns, position, or type."+ANSI_RESET);
+                System.out.println("Invalid deck index. Please select a valid plant from the deck.");
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Deck Invalid, pilih plant yang benar.");
+            System.out.println("Invalid deck index. Please select a valid plant from the deck.");
         }
     }
 
@@ -290,23 +300,24 @@ public class Game {
     private void showStatus() {
         final String ANSI_YELLOW = "\u001B[33m";
         final String ANSI_RESET = "\u001B[0m";
-    
-        System.out.println(ANSI_YELLOW + "╔═════════════════════════╗");
-        System.out.println("║      Current Status     ║");
-        System.out.println("╠═════════════════════════╣");
-        System.out.println("║ Deck                    ║");
-        System.out.println("╠════╦════════════════════╣");
-    
+
+        System.out.println(ANSI_YELLOW + "╔════════════════════════════════════════════════╗");
+        System.out.println("║                Current Status                  ║");
+        System.out.println("╠════════════════════════════════════════════════╣");
+        System.out.println("║ Deck                                           ║");
+        System.out.println("╠════════════════════════════════════════════════╣");
+
         for (int i = 0; i < inventory.getDeck().getPlantTypes().size(); i++) {
             PlantType plantType = inventory.getDeck().getPlantTypes().get(i);
             String plantName = (plantType != null) ? plantType.toString() : "[Empty]";
-            System.out.printf("║ %-2d ║ %-18s ║\n", (i + 1), plantName);
+            String cooldown = (plantType != null && inventory.getDeck().isOnCooldown(plantType)) ? " (Cooldown)" : "";
+            System.out.printf("║ %-46s ║\n", (i + 1) + ". " + plantName + cooldown);
         }
-    
-        System.out.println("╠════╩════════════════════╣");
-        System.out.printf("║ Suns: %-17d ║\n", gameMap.getCurrentSuns());
-        System.out.printf("║ Time: %-17d ║\n", gameMap.getCurrentTime());
-        System.out.println("╚═════════════════════════╝" + ANSI_RESET);
+
+        System.out.println("╠════════════════════════════════════════════════╣");
+        System.out.printf("║ Current Suns: %-32d ║\n", gameMap.getCurrentSuns());
+        System.out.printf("║ Current Time: %-32d ║\n", gameMap.getCurrentTime());
+        System.out.println("╚════════════════════════════════════════════════╝" + ANSI_RESET);
     }
     
 }

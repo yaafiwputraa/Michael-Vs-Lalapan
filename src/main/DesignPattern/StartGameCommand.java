@@ -101,9 +101,9 @@ public class StartGameCommand implements Command {
         final String ANSI_CYAN = "\u001B[36m";
         final String ANSI_RESET = "\u001B[0m";
         System.out.print(ANSI_CYAN+"Masukkan Index Pertama Plant Untuk di swap: "+ANSI_RESET);
-        int index1 = scanner.nextInt();
+        int index1 = scanner.nextInt()-1;
         System.out.print(ANSI_CYAN+"Masukkan Index Kedua Plant untuk di swap: "+ANSI_RESET);
-        int index2 = scanner.nextInt();
+        int index2 = scanner.nextInt()-1;
         scanner.nextLine(); 
         inventory.swapPlantsInDeck(index1, index2);
         System.out.println("Plants berhasil di swap.");

@@ -1,6 +1,7 @@
 package src.main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ public class Deck {
 
     public Deck() {
         this.plantTypes = new ArrayList<>(MAX_DECK_SIZE);
+        this.cooldowns = new HashMap<>();
         for (int i = 0; i < MAX_DECK_SIZE; i++) {
             plantTypes.add(null);
         }

@@ -7,6 +7,7 @@ import src.main.AbstractClass.Plant;
 import src.main.AbstractClass.Zombie;
 import src.main.Plantchild.*;
 
+
 public class GameMap {
     private List<Plant> plants = new ArrayList<>();
     private List<Zombie> zombies = new ArrayList<>();
@@ -14,7 +15,7 @@ public class GameMap {
     private boolean[][] baseArea;
 
     private int currentSuns = 50;
-    private int currentTime = 0; // Total time in seconds for the game
+    private int currentTime = 0; 
     private int width;
     private int height;
 
@@ -27,7 +28,7 @@ public class GameMap {
 
     private void initializePoolArea() {
         poolArea = new boolean[width][height];
-        // Setting the pool area at y = 2 and y = 3 for all x positions
+        
         for (int x = 0; x < width; x++) {
             poolArea[x][2] = true;
             poolArea[x][3] = true;
@@ -55,9 +56,9 @@ public class GameMap {
     }
 
     public boolean addPlant(Plant plant) {
-        if (currentSuns >= plant.getCost() && plant.getX() >= 0 && plant.getX() < width && plant.getY() >= 0 && plant.getY() < height) {
+        if (currentSuns >= plant.cost && plant.x >= 0 && plant.x < width && plant.y >= 0 && plant.y < height) {
             plants.add(plant);
-            currentSuns -= plant.getCost();  // Deduct the cost of the plant from the current suns
+            currentSuns -= plant.cost;  // Deduct the cost of the plant from the current suns
             return true;
         }
         System.out.println("Not enough suns or invalid position.");
@@ -76,13 +77,13 @@ public class GameMap {
             return false;
         }
     
-        // Check if there are enough suns to plant
-        if (currentSuns < plant.getCost()) {
+        
+        if (currentSuns < plant.cost) {
             System.out.println("Not enough suns to plant " + plant.getClass().getSimpleName());
             return false;
         }
     
-        // Handle planting in the pool area
+
         if (isPool(x, y)) {
             if (plant instanceof Lilypad || plant instanceof TangleKelp) {
                 if (isPlantPresent(x, y)) {
@@ -104,10 +105,9 @@ public class GameMap {
             }
         }
     
-        // Add the plant and deduct suns
+        
         plants.add(plant);
-        currentSuns -= plant.getCost();
-        System.out.println(plant.getClass().getSimpleName() + " added at (" + x + ", " + y + ")");
+        currentSuns -= plant.cost;
         return true;
     }
 
@@ -117,12 +117,10 @@ public class GameMap {
 
     public void removePlant(Plant plant) {
         plants.remove(plant);
-        System.out.println("Plant removed from (" + plant.getX() + ", " + plant.getY() + ")");
     }
     
     public void removePlant(int x, int y) {
         plants.removeIf(plant -> plant.getX() == x && plant.getY() == y);
-        System.out.println("Plant removed from (" + x + ", " + y + ")");
     }
 
     public void addZombie(Zombie zombie) {
@@ -147,7 +145,7 @@ public class GameMap {
     }
 
     public List<Zombie> getZombies() {
-        return zombies;  // Return the list of zombies
+        return zombies;  
     }
 
     public List<Zombie> getZombiesInColumn(int column) {
@@ -165,7 +163,7 @@ public class GameMap {
     }
 
     public boolean isMorning() {
-        return currentTime < 100; // Morning is the first 100 seconds of the 200-second cycle
+        return currentTime < 100; 
     }
 
     public boolean zombiesReachedFirstColumn() {
@@ -175,7 +173,7 @@ public class GameMap {
     public void updateTime() {
         currentTime ++;
         if (currentTime >= 200) {
-            currentTime = 0; // Reset the cycle every 200 seconds
+            currentTime = 0; 
         }
     }
 
@@ -196,66 +194,86 @@ public class GameMap {
     }
 
     public List<Plant> getAllPlants() {
-        return new ArrayList<>(plants);  // Return a copy of the plant list
+        return new ArrayList<>(plants);  
     }
 
     public void printMap() {
-        // Initialize a grid representation
+        
+        final String RESET = "\u001B[0m";
+        final String GREEN_BACKGROUND = "\u001B[42m";
+        final String BLUE_BACKGROUND = "\u001B[44m";
+        final String PINK_BACKGROUND = "\u001B[45m";
+        final String ZOMBIE = "\u001B[31mZ" + RESET;  
+        final String SUNFLOWER = "\u001B[33mS" + RESET;  
+        final String PEASHOOTER = "\u001B[32mP" + RESET;  
+        final String REPEATER = "\u001B[32mR" + RESET;  
+        final String WALLNUT = "\u001B[33mW" + RESET;  
+        final String LILYPAD = "\u001B[36mL" + RESET;  
+        final String TANGLEKELP = "\u001B[36mT" + RESET;  
+        final String SQUASH = "\u001B[35mQ" + RESET;  
+        final String CHOMPER = "\u001B[35mC" + RESET;  
+        final String SNOWPEA = "\u001B[34mN" + RESET;  
+        final String JALAPENO = "\u001B[31mJ" + RESET;
+    
+        
         String[][] grid = new String[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (i == 0){
-                    grid[i][j] = "";
-                }else{
-                    grid[i][j] = "-";  // Empty space
+                if (isBase(i, j)) {
+                    grid[i][j] = PINK_BACKGROUND + " " + RESET;  
+                } else if (isPool(i, j)) {
+                    grid[i][j] = BLUE_BACKGROUND + " " + RESET;  
+                } else {
+                    grid[i][j] = GREEN_BACKGROUND + " " + RESET;  
                 }
-                
             }
         }
-
-        // Place plants on the grid
+    
+        
         for (Plant plant : plants) {
-            String plantSymbol = "P";  // Generic plant symbol
+            String plantSymbol = "P";  
             if (plant instanceof Sunflower) {
-                plantSymbol = "SF";  // Specific symbol for Sunflowers
+                plantSymbol = SUNFLOWER;
             } else if (plant instanceof Peashooter) {
-                plantSymbol = "P";  // Specific symbol for Peashooters
+                plantSymbol = PEASHOOTER;
             } else if (plant instanceof Repeater) {
-                plantSymbol = "R";  // Specific symbol for Repeaters
+                plantSymbol = REPEATER;
             } else if (plant instanceof Wallnut) {
-                plantSymbol = "W";  // Specific symbol for Wallnuts
+                plantSymbol = WALLNUT;
             } else if (plant instanceof Lilypad) {
-                plantSymbol = "L";  // Specific symbol for Lilypads
+                plantSymbol = LILYPAD;
             } else if (plant instanceof TangleKelp) {
-                plantSymbol = "T";  // Specific symbol for TangleKelp
+                plantSymbol = TANGLEKELP;
             } else if (plant instanceof Squash) {
-                plantSymbol = "SQ";  // Specific symbol for Squash
+                plantSymbol = SQUASH;
             } else if (plant instanceof Chomper) {
-                plantSymbol = "C";  // Specific symbol for Chomper
+                plantSymbol = CHOMPER;
             } else if (plant instanceof Snowpea) {
-                plantSymbol = "N";  // Specific symbol for Snowpea
+                plantSymbol = SNOWPEA;
+            } else if (plant instanceof Jalapeno) {
+                plantSymbol = JALAPENO;
             }
-            grid[plant.getX()][plant.getY()] = plantSymbol;
+            grid[plant.x][plant.y] = plantSymbol;
         }
-
+    
         // Place zombies on the grid
         for (Zombie zombie : zombies) {
-            grid[zombie.getX()][zombie.getY()] = "Z";  // Zombie symbol
+            grid[zombie.getX()][zombie.getY()] = ZOMBIE;  
         }
-
+    
         // Print the grid to console
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
-                System.out.print(grid[i][j] + "");
+                System.out.print(grid[i][j]);
             }
-            System.out.println();  // New line at the end of each row
+            System.out.println();  
         }
-        System.out.println("Current Suns: " + currentSuns);  // Display current suns
+        
     }
 
     public Plant getPlant(int x, int y) {
         for (Plant plant : plants) {
-            if (plant.getX() == x && plant.getY() == y) {
+            if (plant.x == x && plant.y == y) {
                 return plant;
             }
         }
@@ -264,3 +282,4 @@ public class GameMap {
 
     
 }
+
