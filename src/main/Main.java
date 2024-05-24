@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import src.main.DesignPattern.*;
 import src.main.Display.*;
 import src.main.Interface.Command;
 

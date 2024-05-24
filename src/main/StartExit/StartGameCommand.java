@@ -1,4 +1,5 @@
-package src.main.DesignPattern;
+package src.main.StartExit;
+
 import src.main.Interface.Command;
 import src.main.Deck;
 import src.main.Game;
