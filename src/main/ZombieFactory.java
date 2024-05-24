@@ -1,6 +1,9 @@
 package src.main;
 import java.util.Random;
 
+import src.main.AbstractClass.Zombie;
+import src.main.Zombiechild.*;
+
 public class ZombieFactory {
     private GameMap gameMap;
     private Random random;

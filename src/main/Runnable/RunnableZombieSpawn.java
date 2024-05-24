@@ -3,6 +3,8 @@ package src.main.Runnable;
 import java.util.Random;
 
 import src.main.GameMap;
+import src.main.ZombieFactory;
+import src.main.AbstractClass.Zombie;
 import src.main.Zombiechild.*;
 
 import java.util.Random;
