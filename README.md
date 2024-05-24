@@ -12,3 +12,10 @@ Michael vs. Lalapan merupakan versi sederhana dari permainan populer Plant vs. Z
 | Muhammad Yaafi Wasesa Putra | 18222052  | 
 | Athar Mahendra Umar         | 18222080  | 
 | Kerlyn Deslia Andeskar      | 18222090  |
+
+## Cara Kompilasi Program
+- Clone repository dari github dengan menyalin command berikut ke terminal
+“git clone https://github.com/yaafiwputraa/Michael-Vs-Lalapan.git”
+- Setelah di-clone, ubah directory ke repository hasil clone
+“cd <lokasi directory>/Michael-Vs-Lalapan”
+- Run program yang ada di Main.java
