@@ -1,9 +1,9 @@
 package src.main;
 
-
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import src.main.Runnable.*;
 
 public class Game {
     private GameMap gameMap;
