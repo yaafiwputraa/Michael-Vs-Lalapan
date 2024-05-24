@@ -237,7 +237,7 @@ public class Game {
                     System.out.println("Cannot plant " + plantType + ". It is on cooldown.");
                 } else {
                     Plant plant = createPlant(plantType, x, y);
-                    if (plant != null && gameMap.addPlant(plant)) {
+                    if (plant != null && gameMap.addPlant(plant, x, y)) {
                         System.out.println("Planted " + plantType + " at (" + x + ", " + y + ").");
                         inventory.getDeck().setCooldown(plantType, System.currentTimeMillis() + plant.getCooldown() * 1000);
                     } else {
