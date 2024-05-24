@@ -89,7 +89,7 @@ public class StartGameCommand implements Command {
         System.out.print(ANSI_CYAN+"Select a plant to add to the deck: "+ANSI_RESET);
         int plantIndex = scanner.nextInt();
         scanner.nextLine(); 
-        if (plantIndex >= 0 && plantIndex < inventory.getAllPlantTypes().size()+1) {
+        if (plantIndex > 0 && plantIndex < inventory.getAllPlantTypes().size()+1) {
             inventory.addPlantToDeck(plantIndex);
             
         } else {
