@@ -15,11 +15,23 @@ public class Peashooter extends Plant {
 
     @Override
     public void performAction() {
+        Zombie closestZombie = null;
+        int closestDistance = Integer.MAX_VALUE;
+
         
         for (Zombie zombie : gameMap.getZombiesInColumn(y)) {
-            if (zombie.isAlive()) {
-                zombie.takeDamage(attackDamage);
+            if (zombie.isAlive() && zombie.getX() > x) { 
+                int distance = zombie.getX() - x;
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestZombie = zombie;
+                }
             }
+        }
+
+        // Attack the closest zombie
+        if (closestZombie != null) {
+            closestZombie.takeDamage(attackDamage);
         }
     }
 

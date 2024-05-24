@@ -16,14 +16,23 @@ public class Repeater extends Plant {
 
     @Override
     public void performAction() {
+        Zombie closestZombie = null;
+        int closestDistance = Integer.MAX_VALUE;
+
         
-        List<Zombie> targets = gameMap.getZombiesInColumn(y);
-        if (!targets.isEmpty()) {
-            for (Zombie zombie : targets) {
-                if (zombie.isAlive()) {
-                    zombie.takeDamage(attackDamage);
+        for (Zombie zombie : gameMap.getZombiesInColumn(y)) {
+            if (zombie.isAlive() && zombie.getX() > x) { 
+                int distance = zombie.getX() - x;
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestZombie = zombie;
                 }
             }
+        }
+
+        // Attack the closest zombie
+        if (closestZombie != null) {
+            closestZombie.takeDamage(attackDamage);
         }
     }
 
