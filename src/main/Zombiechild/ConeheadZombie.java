@@ -8,17 +8,6 @@ public class ConeheadZombie extends Zombie {
         super(250, 100, 1, x, y, false);
     }
 
-    // @Override
-    // public void move() {
-    //     long currentTime = System.currentTimeMillis();
-    //     if (currentTime >= nextMoveTime) {
-    //         if (x > 0) {
-    //             x--; // Move zombie one step to the left
-    //         }
-    //         updateNextMoveTime();
-    //     }
-    // }
-
     public void attack(Plant plant) {
         if (plant != null) {
             plant.reduceHealth(attackDamage);

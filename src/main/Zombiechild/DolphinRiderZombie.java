@@ -23,9 +23,6 @@ public class DolphinRiderZombie extends Zombie implements VaultingInterface {
                 }
             } else {     
                 plant.reduceHealth(attackDamage);
-                // if (!plant.isAlive()) {
-                //     gameMap.removePlant(plant);
-                // }
             }
         }
     }
