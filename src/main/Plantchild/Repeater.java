@@ -8,22 +8,14 @@ import java.util.List;
 public class Repeater extends Plant {
     private GameMap gameMap;
 
-    public Repeater() {
-        super("repeater",150, 100, 50, 3, -1, 20, 0, 0);  // Initialize with specified attributes
-        
-    }
-
     public Repeater(int x, int y, GameMap gameMap) {
-        this();
-        this.x = x;
-        this.y = y;
+        super("repeater",200, 100, 50, 3, -1, 20, x, y, PlantType.REPEATER);  
         this.gameMap = gameMap;
     }
 
     @Override
     public void performAction() {
-        // This method handles the attack mechanism of the Repeater
-        // It attacks all zombies in the same column as the Repeater
+        
         List<Zombie> targets = gameMap.getZombiesInColumn(y);
         if (!targets.isEmpty()) {
             for (Zombie zombie : targets) {
@@ -36,11 +28,12 @@ public class Repeater extends Plant {
 
     @Override
     public boolean isAttackingType() {
-        return true; // Repeater is an attacking type plant
+        return true; 
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public Plant clone(int x, int y, GameMap gameMap) {
+        return new Repeater(x, y, gameMap);
     }
 }
 

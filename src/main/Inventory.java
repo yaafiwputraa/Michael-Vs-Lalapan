@@ -1,40 +1,67 @@
 package src.main;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import src.main.AbstractClass.Plant;
-import src.main.Plantchild.*;
 
 public class Inventory {
-    private Map<String, Plant> plants;
+    private List<PlantType> allPlantTypes;
+    private Deck deck;
 
     public Inventory() {
-        plants = new HashMap<>();
-        plants.put("Peashooter", new Peashooter());
-        plants.put("Sunflower", new Sunflower());
-        plants.put("Repeater", new Repeater());
-        plants.put("TangleKelp", new TangleKelp());
-        plants.put("Lilypad", new Lilypad());
-        plants.put("Squash", new Squash());
-        plants.put("Wallnut", new Wallnut());
-        plants.put("Chomper", new Chomper());
-        plants.put("Snowpea", new Snowpea());
-        plants.put("Jalapeno", new Jalapeno());
-        // Add more plants as needed
+        this.allPlantTypes = new ArrayList<>();
+        initializePlantTypes();
+        this.deck = new Deck();
     }
 
-    public boolean hasPlant(String plantName) {
-        return plants.containsKey(plantName);
+    private void initializePlantTypes() {
+        // Initialize with all plant types
+        allPlantTypes.add(PlantType.PEASHOOTER);
+        allPlantTypes.add(PlantType.SUNFLOWER);
+        allPlantTypes.add(PlantType.WALLNUT);
+        allPlantTypes.add(PlantType.SQUASH);
+        allPlantTypes.add(PlantType.REPEATER);
+        allPlantTypes.add(PlantType.SNOWPEA);
+        allPlantTypes.add(PlantType.CHOMPER);
+        allPlantTypes.add(PlantType.LILYPAD);
+        allPlantTypes.add(PlantType.TANGLEKELP);
+        allPlantTypes.add(PlantType.JALAPENO);
     }
 
-    public Plant getPlant(String plantName) {
-        return plants.get(plantName);
+    public List<PlantType> getAllPlantTypes() {
+        return allPlantTypes;
     }
 
-    public List<String> getPlantNames() {
-        return new ArrayList<>(plants.keySet());
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void addPlantToDeck(int plantIndex) {
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RED = "\u001B[31m";
+        if (plantIndex >= 0 && plantIndex < allPlantTypes.size()+1) {
+            PlantType plantType = allPlantTypes.get(plantIndex-1);
+            if (deck.contains(plantType)) {
+                System.out.println(ANSI_RED+"Plant ini sudah ada dalam deck"+ANSI_RESET);
+            } else {
+                deck.addPlant(plantType);
+                System.out.println(ANSI_GREEN+"Plant berhasil ditambahkan."+ANSI_RESET);
+            }
+        } else {
+            System.out.println("Invalid plant selection.");
+        }
+    }
+
+    public boolean removePlantFromDeck(int deckIndex) {
+        if (deckIndex >= 0 && deckIndex < deck.getPlantTypes().size()) {
+            return deck.removePlant(deckIndex);
+        } else {
+            System.out.println("Invalid index or empty slot. Cannot remove plant.");
+            return false;
+        }
+    }
+
+    public void swapPlantsInDeck(int index1, int index2) {
+        deck.swapPlants(index1, index2);
     }
 }

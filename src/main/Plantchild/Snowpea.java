@@ -6,14 +6,8 @@ import src.main.AbstractClass.Zombie;
 
 public class Snowpea extends Plant {
     private GameMap gameMap;
-    public Snowpea() {
-        super("Snowpea", 175, 100, 25, 4, -1, 10, 0, 0);  // Initialize with the constructor of the Plant class
-    }
-
     public Snowpea(int x, int y, GameMap gameMap) {
-        this();
-        this.x = x;
-        this.y = y;
+        super("Snowpea", 175, 100, 25, 4, -1, 10, x, y, PlantType.SNOWPEA);  
         this.gameMap = gameMap;
     }
 
@@ -24,7 +18,7 @@ public class Snowpea extends Plant {
         if (!targets.isEmpty()) {
             for (Zombie zombie : targets) {
                 zombie.takeDamage(attackDamage);
-                zombie.applySlowingEffect(3000);  // Apply slowing effect for 3000 milliseconds (3 seconds)
+                zombie.applySlowingEffect(3000);  
             }
         }
     }
@@ -33,7 +27,8 @@ public class Snowpea extends Plant {
         return true;  // Snowpea is an attacking type plant
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public Plant clone(int x, int y, GameMap gameMap) {
+        return new Snowpea(x, y, gameMap);
     }
 }

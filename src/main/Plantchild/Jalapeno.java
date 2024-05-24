@@ -5,33 +5,28 @@ import java.util.List;
 import src.main.GameMap;
 import src.main.AbstractClass.Plant;
 import src.main.AbstractClass.Zombie;
+import src.main.PlantType;
 
 public class Jalapeno extends Plant {
 
     private GameMap gameMap;
 
-    public Jalapeno() {
-        super("jalapeno", 25, 100, 0, 0, 0, 10, 0, 0); // Parameters: name, cost, health, attackDamage, attackSpeed, range, cooldown, x, y
-    }
-
     public Jalapeno(int x, int y, GameMap gameMap) {
-        this();
-        this.x = x;
-        this.y = y;
+        super("jalapeno", 125, 100, 0, 0, 0, 10, x, y, PlantType.JALAPENO); 
         this.gameMap = gameMap;
     }
 
     @Override
     public void performAction() {
-        // Remove all zombies in the same lane (same y-coordinate)
+        
         List<Zombie> zombiesInLane = gameMap.getZombiesInColumn(y);
         for (Zombie zombie : zombiesInLane) {
             gameMap.removeZombie(zombie);
         }
 
-        // Remove Jalapeno itself after attacking
+        
         gameMap.removePlant(this);
-        System.out.println("Jalapeno detonated at (" + x + ", " + y + "), killing all zombies in lane " + y);
+        System.out.println("DDUUUUARRRR!, Jalapeno explodes (" + x + ", " + y + "), killing all zombies in lane " + y);
     }
 
     @Override
@@ -39,8 +34,8 @@ public class Jalapeno extends Plant {
         return true;
     }
 
-    @Override
-    public String getName() {
-        return name;
+    public Plant clone(int x, int y, GameMap gameMap) {
+        return new Jalapeno(x, y, gameMap);
     }
 }
+

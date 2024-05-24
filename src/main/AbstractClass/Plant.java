@@ -1,5 +1,6 @@
 package src.main.AbstractClass;
 
+
 public abstract class Plant {
     protected String name;
     protected int cost;
@@ -11,8 +12,9 @@ public abstract class Plant {
     protected int remainingCooldown;
     protected int x, y;  
     protected long nextActionTime;
+    private PlantType type;
 
-    public Plant(String name, int cost, int health, int attackDamage, int attackSpeed, int range, int cooldown, int x, int y) {
+    public Plant(String name, int cost, int health, int attackDamage, int attackSpeed, int range, int cooldown, int x, int y, PlantType type) {
         this.name = name;
         this.cost = cost;
         this.health = health;
@@ -24,7 +26,14 @@ public abstract class Plant {
         this.x = x;
         this.y = y;
         this.nextActionTime = System.currentTimeMillis() + (attackSpeed * 1000);
+        this.type = type;
     }
+
+    public PlantType getType() {
+        return type;
+    }
+
+    public abstract Plant clone(int x, int y, GameMap gameMap);
 
     public abstract void performAction();  
     public abstract boolean isAttackingType();  
@@ -86,3 +95,4 @@ public abstract class Plant {
         this.y = y;
     }
 }
+

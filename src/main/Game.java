@@ -1,26 +1,28 @@
 package src.main;
 
+
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import src.main.AbstractClass.Plant;
-import src.main.Plantchild.*;
-import src.main.Runnable.*;
 
 public class Game {
     private GameMap gameMap;
     private boolean isRunning;
     private Scanner scanner;
-    private Deck deck;
+    private Inventory inventory;
+
     public Game() {
         this.gameMap = new GameMap(11, 6);
         this.isRunning = true;
         this.scanner = new Scanner(System.in);
-        this.deck = deck;
     }
 
     public void startGame() {
+        if (!inventory.getDeck().isFull()) {
+            System.out.println("Deck is not full. Please fill the deck before starting the game.");
+            return;
+        }
+
         gameMap = new GameMap(11, 6); // Reinitialize the game map for a new game
         isRunning = true; // Reset the running state
 
@@ -33,19 +35,32 @@ public class Game {
 
         while (isRunning) {
             if (gameMap.zombiesReachedFirstColumn()) {
+                System.out.println("  ▄▀  ██   █▀▄▀█ ▄███▄       ████▄     ▄   ▄███▄   █▄▄▄▄ ");
+                System.out.println("▄▀    █ █  █ █ █ █▀   ▀      █   █      █  █▀   ▀  █  ▄▀ ");
+                System.out.println("█ ▀▄  █▄▄█ █ ▄ █ ██▄▄        █   █ █     █ ██▄▄    █▀▀▌  ");
+                System.out.println("█   █ █  █ █   █ █▄   ▄▀     ▀████  █    █ █▄   ▄▀ █  █  ");
+                System.out.println(" ███     █    █  ▀███▀               █  █  ▀███▀     █   ");
+                System.out.println("        █    ▀                        █▐            ▀    ");
+                System.out.println("       ▀                              ▐                 ");
                 System.out.println("Game Over! Zombies have reached the base.");
                 isRunning = false; // End the game loop
                 break;
             }
 
-            System.out.println("Enter command ('Plant [type] x y', 'Dig [type] x y', 'Exit'):");
+            if (gameMap.getCurrentTime() > 160 && gameMap.getCurrentTime() <= 200 && gameMap.getZombies().isEmpty()) {
+                System.out.println("Congratulations! You have defeated all zombies. You win!");
+                isRunning = false; // End the game loop
+                break;
+            }
+
+            System.out.println("Enter command ('Plant [deckIndex] x y', 'Dig x y', 'Exit'):");
             String command = scanner.nextLine();
             if (command.equalsIgnoreCase("exit")) {
                 System.out.println("Exiting game...");
                 isRunning = false; // End the game loop
                 break;
             }
-            handleCommand(command, gameMap);
+            handleCommand(command);
         }
 
         // Shut down executor and close resources
@@ -80,11 +95,11 @@ public class Game {
         System.out.println("*" + ANSI_RESET + "   Zombies List      : Menampilkan list dari informasi zombie yang dapat muncul dalam permainan.                                    " + ANSI_BLUE + " *");
         System.out.println("*" + ANSI_RESET + "   Exit              : Keluar dari permainan.                                                                                       " + ANSI_BLUE + " *");
         System.out.println("***************************************************************************************************************************************");
-        System.out.println("*" + ANSI_GREEN + " Press any key to return to the main menu...                                                                                        " + ANSI_BLUE + " *");
+        System.out.println("*" + ANSI_GREEN + " Ketik apapun untuk kembali ke Main Menu...                                                                                         " + ANSI_BLUE + " *");
         System.out.println("***************************************************************************************************************************************" + ANSI_RESET);
         scanner.nextLine();
     }
-    
+
     public void displayPlantsList() {
         final String ANSI_BLUE = "\u001B[34m";
         final String ANSI_YELLOW = "\u001B[33m";
@@ -135,123 +150,158 @@ public class Game {
         System.out.println("║" + ANSI_RESET + "     Cost: " + ANSI_YELLOW + "125" + ANSI_RESET + ", Health: " + ANSI_GREEN + "100" + ANSI_RESET + ", Attack Damage: " + ANSI_RED + "1000" + ANSI_RESET + ", Attack Speed: " + ANSI_RED + "1" + ANSI_RESET + "           ║");
         System.out.println("║     Range: " + ANSI_RED + "-1" + ANSI_RESET + ", Cooldown: " + ANSI_YELLOW + "10" + ANSI_RESET + "                                                ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════════╝");
-        System.out.println(ANSI_RESET + "Press any key to return to the main menu...");
+        System.out.println(ANSI_RESET + "Ketik apapun untuk kembali ke Main Menu...");
         scanner.nextLine(); // Assuming scanner is defined elsewhere in your class
     }
-    
-    
-    
 
     public void displayZombiesList() {
-    final String ANSI_BLUE = "\u001B[34m";
-    final String ANSI_YELLOW = "\u001B[33m";
-    final String ANSI_GREEN = "\u001B[32m";
-    final String ANSI_RED = "\u001B[31m";
-    final String ANSI_CYAN = "\u001B[36m";
-    final String ANSI_PURPLE = "\u001B[35m";
-    final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_BLUE = "\u001B[34m";
+        final String ANSI_YELLOW = "\u001B[33m";
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_CYAN = "\u001B[36m";
+        final String ANSI_PURPLE = "\u001B[35m";
+        final String ANSI_RESET = "\u001B[0m";
+    
+        System.out.println(ANSI_BLUE + "╔═════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║" + ANSI_YELLOW + "                                       Zombies List                                 " + ANSI_BLUE + " ║");
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║" + ANSI_GREEN + " Normal Zombie             " + ANSI_RESET + " Health: " + ANSI_RED + "125" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
+        System.out.println("║" + ANSI_GREEN + " Conehead Zombie           " + ANSI_RESET + " Health: " + ANSI_RED + "250" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
+        System.out.println("║" + ANSI_GREEN + " Buckethead Zombie         " + ANSI_RESET + " Health: " + ANSI_RED + "300" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
+        System.out.println("║" + ANSI_GREEN + " Ducky Tube Zombie         " + ANSI_RESET + " Health: " + ANSI_RED + "100" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "true" + ANSI_BLUE + "     ║");
+        System.out.println("║" + ANSI_GREEN + " Pole Vaulting Zombie      " + ANSI_RESET + " Health: " + ANSI_RED + "175" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
+        System.out.println("║" + ANSI_GREEN + " Dolphin Rider Zombie      " + ANSI_RESET + " Health: " + ANSI_RED + "175" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "true" + ANSI_BLUE + "     ║");
+        System.out.println("║" + ANSI_GREEN + " Giga Zombie               " + ANSI_RESET + " Health: " + ANSI_RED + "400" + ANSI_RESET + ", Damage: " + ANSI_RED + "1000" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "   ║");
+        System.out.println("║" + ANSI_GREEN + " Saraga Zombie             " + ANSI_RESET + " Health: " + ANSI_RED + "100" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "true" + ANSI_BLUE + "     ║");
+        System.out.println("║" + ANSI_GREEN + " Newspaper Zombie          " + ANSI_RESET + " Health: " + ANSI_RED + "125" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
+        System.out.println("║" + ANSI_GREEN + " Jack In The Box Zombie    " + ANSI_RESET + " Health: " + ANSI_RED + "100" + ANSI_RESET + ", Damage: " + ANSI_RED + "1000" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "   ║");
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║" + ANSI_PURPLE + " Ketik apapun untuk kembali ke Main Menu...                                          " + ANSI_BLUE + "║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
+        scanner.nextLine(); // Pause for user to read zombie list
+    }
 
-    System.out.println(ANSI_BLUE + "╔═════════════════════════════════════════════════════════════════════════════════════╗");
-    System.out.println("║" + ANSI_YELLOW + "                                       Zombies List                                 " + ANSI_BLUE + " ║");
-    System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════╣");
-    System.out.println("║" + ANSI_GREEN + " Normal Zombie             " + ANSI_RESET + " Health: " + ANSI_RED + "125" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
-    System.out.println("║" + ANSI_GREEN + " Conehead Zombie           " + ANSI_RESET + " Health: " + ANSI_RED + "250" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
-    System.out.println("║" + ANSI_GREEN + " Buckethead Zombie         " + ANSI_RESET + " Health: " + ANSI_RED + "300" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
-    System.out.println("║" + ANSI_GREEN + " Ducky Tube Zombie         " + ANSI_RESET + " Health: " + ANSI_RED + "100" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "true" + ANSI_BLUE + "     ║");
-    System.out.println("║" + ANSI_GREEN + " Pole Vaulting Zombie      " + ANSI_RESET + " Health: " + ANSI_RED + "175" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
-    System.out.println("║" + ANSI_GREEN + " Dolphin Rider Zombie      " + ANSI_RESET + " Health: " + ANSI_RED + "175" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "true" + ANSI_BLUE + "     ║");
-    System.out.println("║" + ANSI_GREEN + " Giga Zombie               " + ANSI_RESET + " Health: " + ANSI_RED + "400" + ANSI_RESET + ", Damage: " + ANSI_RED + "1000" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "   ║");
-    System.out.println("║" + ANSI_GREEN + " Saraga Zombie             " + ANSI_RESET + " Health: " + ANSI_RED + "100" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "true" + ANSI_BLUE + "     ║");
-    System.out.println("║" + ANSI_GREEN + " Newspaper Zombie          " + ANSI_RESET + " Health: " + ANSI_RED + "125" + ANSI_RESET + ", Damage: " + ANSI_RED + "100" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "    ║");
-    System.out.println("║" + ANSI_GREEN + " Jack In The Box Zombie    " + ANSI_RESET + " Health: " + ANSI_RED + "100" + ANSI_RESET + ", Damage: " + ANSI_RED + "1000" + ANSI_RESET + ", Speed: " + ANSI_RED + "1" + ANSI_RESET + ", is_aquatic: " + ANSI_RED + "false" + ANSI_BLUE + "   ║");
-    System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════╣");
-    System.out.println("║" + ANSI_PURPLE + " Press any key to return to the main menu...                                         " + ANSI_BLUE + "║");
-    System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
-    scanner.nextLine(); // Pause for user to read zombie list
-}
-
-
-    private void handleCommand(String command, GameMap gameMap) {
+    private void handleCommand(String command) {
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_RESET = "\u001B[0m";
         String[] parts = command.trim().split(" ");
         if (parts.length == 0) {
-            System.out.println("Invalid command format.");
+            System.out.println(ANSI_RED+"Invalid command format."+ ANSI_RESET);
             return;
         }
-    
+
         String action = parts[0].toLowerCase();
-        if ("exit".equals(action)) {
-            isRunning = false;
-            return;
-        }
-    
         try {
-            if (action.equals("plant")) {
-                if (parts.length < 4) {
-                    System.out.println("Invalid command format for planting.");
-                    return;
-                }
-                int x = Integer.parseInt(parts[2]);
-                int y = Integer.parseInt(parts[3]);
-                String type = parts[1].toLowerCase();
-                Plant plant = deck.getPlant(type);
-                if (plant != null) {
-                    plant.setPosition(x, y);
-                    if (gameMap.addPlant(plant, x, y)) {
-                        System.out.println("Planted " + type + " at (" + x + ", " + y + ").");
-                    } else {
-                        System.out.println("Failed to plant. Check suns, position, or type.");
-                    }
-                } else {
-                    System.out.println("Invalid plant type or not in deck.");
-                }
-            } else if (action.equals("dig")) {
-                if (parts.length < 3) {
-                    System.out.println("Invalid command format for digging.");
-                    return;
-                }
-                int x = Integer.parseInt(parts[2]);
-                int y = Integer.parseInt(parts[3]);
-                if (gameMap.isPlantPresent(x, y)) {
-                    gameMap.removePlant(x, y);
-                    System.out.println("Removed plant at (" + x + ", " + y + ").");
-                } else {
-                    System.out.println("No plant to remove at (" + x + ", " + y + ").");
-                }
-            } else {
-                System.out.println("Invalid input.");
+            switch (action) {
+                case "plant":
+                    PlantCommand(parts);
+                    break;
+                case "dig":
+                    DigCommand(parts);
+                    break;
+                default:
+                    System.out.println(ANSI_RED+"Invalid command."+ANSI_RESET);
+                    break;
             }
         } catch (NumberFormatException e) {
-            System.out.println("Error: Invalid numerical values provided.");
+            System.out.println(ANSI_RED+"Error: Invalid numerical values provided."+ANSI_RESET);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Error: Command does not include enough information.");
+            System.out.println(ANSI_RED+"Error: Command does not include enough information."+ANSI_RESET);
         }
-    
-        gameMap.printMap();  // Optionally print the map to show updates after any command
-    }
-    
 
-    private Plant createPlant(String type) {
-        switch (type.toLowerCase()) {
-            case "repeater":
-                return new Repeater();
-            case "sunflower":
-                return new Sunflower();
-            case "peashooter":
-                return new Peashooter();
-            case "tanglekelp":
-                return new TangleKelp();
-            case "lilypad":
-                return new Lilypad();
-            case "squash":
-                return new Squash();
-            case "wallnut":
-                return new Wallnut();
-            case "chomper":
-                return new Chomper();
-            case "snowpea":
-                return new Snowpea();
-            default:
-                return null;  // Return null if the plant type is unknown
+        gameMap.printMap();
+        showStatus();
+    }
+
+    private void PlantCommand(String[] parts) {
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_RESET = "\u001B[0m";
+        if (parts.length < 4) {
+            System.out.println(ANSI_RED+"Format penanaman salah."+ANSI_RESET);
+            return;
+        }
+        int deckIndex = Integer.parseInt(parts[1])-1;
+        int x = Integer.parseInt(parts[2]);
+        int y = Integer.parseInt(parts[3]);
+
+        try {
+            PlantType plantType = inventory.getDeck().getPlantTypes().get(deckIndex);
+            if (plantType != null && gameMap.addPlant(createPlant(plantType, x, y), x, y)) {
+                System.out.println("Planted " + plantType + " at (" + x + ", " + y + ").");
+            } else {
+                System.out.println(ANSI_RED+"Failed to plant. Check suns, position, or type."+ANSI_RESET);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Deck Invalid, pilih plant yang benar.");
         }
     }
+
+    private void DigCommand(String[] parts) {
+        if (parts.length < 3) {
+            System.out.println("Format untuk menggali salah.");
+            return;
+        }
+        int x = Integer.parseInt(parts[1]);
+        int y = Integer.parseInt(parts[2]);
+        if (gameMap.isPlantPresent(x, y)) {
+            gameMap.removePlant(x, y);
+            System.out.println("Removed plant at (" + x + ", " + y + ").");
+        } else {
+            System.out.println("No plant to remove at (" + x + ", " + y + ").");
+        }
+    }
+    private Plant createPlant(PlantType plantType, int x, int y) {
+        switch (plantType) {
+            case PEASHOOTER:
+                return new Peashooter(x, y, gameMap);
+            case SUNFLOWER:
+                return new Sunflower(x, y, gameMap);
+            case WALLNUT:
+                return new Wallnut(x, y, gameMap);
+            case SQUASH:
+                return new Squash(x, y, gameMap);
+            case REPEATER:
+                return new Repeater(x, y, gameMap);
+            case SNOWPEA:
+                return new Snowpea(x, y, gameMap);
+            case CHOMPER:
+                return new Chomper(x, y, gameMap);
+            case LILYPAD:
+                return new Lilypad(x, y, gameMap);
+            case TANGLEKELP:
+                return new TangleKelp(x, y, gameMap);
+            case JALAPENO:
+                return new Jalapeno(x, y, gameMap);
+            default:
+                return null;
+        }
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    private void showStatus() {
+        final String ANSI_YELLOW = "\u001B[33m";
+        final String ANSI_RESET = "\u001B[0m";
+    
+        System.out.println(ANSI_YELLOW + "╔═════════════════════════╗");
+        System.out.println("║      Current Status     ║");
+        System.out.println("╠═════════════════════════╣");
+        System.out.println("║ Deck                    ║");
+        System.out.println("╠════╦════════════════════╣");
+    
+        for (int i = 0; i < inventory.getDeck().getPlantTypes().size(); i++) {
+            PlantType plantType = inventory.getDeck().getPlantTypes().get(i);
+            String plantName = (plantType != null) ? plantType.toString() : "[Empty]";
+            System.out.printf("║ %-2d ║ %-18s ║\n", (i + 1), plantName);
+        }
+    
+        System.out.println("╠════╩════════════════════╣");
+        System.out.printf("║ Suns: %-17d ║\n", gameMap.getCurrentSuns());
+        System.out.printf("║ Time: %-17d ║\n", gameMap.getCurrentTime());
+        System.out.println("╚═════════════════════════╝" + ANSI_RESET);
+    }
+    
 }

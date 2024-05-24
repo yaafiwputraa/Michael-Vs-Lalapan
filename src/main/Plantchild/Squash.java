@@ -7,24 +7,18 @@ import src.main.AbstractClass.Zombie;
 public class Squash extends Plant {
 
     private GameMap gameMap;
-    public Squash() {
-        super("squash",25, 100, 1000, 0, 0, 10, 0, 0); // Assuming parameters for Plant are cost, health, attackDamage, attackSpeed, range, cooldown, x, y
-    }
-
     public Squash(int x, int y, GameMap gameMap) {
-        this();
-        this.x = x;
-        this.y = y;
+        super("squash",25, 100, 1000, 0, 0, 10, x, y, PlantType.SQUASH);
         this.gameMap = gameMap;
     }
 
     @Override
     public void performAction() {
         
-        Zombie target = gameMap.getZombieAt(x + 1, y); // Get zombie right in front
+        Zombie target = gameMap.getZombieAt(x + 1, y); 
         if (target != null) {
-            gameMap.removeZombie(target); // Remove the zombie
-            gameMap.removePlant(this); // Remove TangleKelp itself after attacking
+            gameMap.removeZombie(target); 
+            gameMap.removePlant(this); 
         }
     }
 
@@ -32,7 +26,8 @@ public class Squash extends Plant {
         return true; 
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public Plant clone(int x, int y, GameMap gameMap) {
+        return new Squash(x, y, gameMap);
     }
 }
