@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import src.main.Display.*;
 import src.main.Interface.Command;
+import src.main.StartExit.ExitCommand;
+import src.main.StartExit.StartGameCommand;
 
 
 public class Main {
