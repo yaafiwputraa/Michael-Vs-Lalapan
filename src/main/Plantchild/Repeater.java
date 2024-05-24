@@ -2,6 +2,7 @@ package src.main.Plantchild;
 import java.util.List;
 import src.main.AbstractClass.Plant;
 import src.main.GameMap;
+import src.main.PlantType;
 import src.main.AbstractClass.Zombie;
 import java.util.List;
 

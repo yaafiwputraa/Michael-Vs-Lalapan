@@ -1,6 +1,7 @@
 package src.main.Plantchild;
 
 import src.main.GameMap;
+import src.main.PlantType;
 import src.main.AbstractClass.Plant;
 
 public class Sunflower extends Plant {

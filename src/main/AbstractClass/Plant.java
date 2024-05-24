@@ -1,5 +1,6 @@
 package src.main.AbstractClass;
 
+import src.main.GameMap;
 import src.main.PlantType;
 
 public abstract class Plant {

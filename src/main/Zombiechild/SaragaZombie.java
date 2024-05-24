@@ -26,6 +26,7 @@ public class SaragaZombie extends Zombie {
             isDived = false;
             takeDamage(attackDamage);
 
+        }
     }
 
     @Override
