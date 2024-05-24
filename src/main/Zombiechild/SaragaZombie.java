@@ -5,7 +5,7 @@ import src.main.AbstractClass.Zombie;
 
 public class SaragaZombie extends Zombie {
     private boolean isDived;
-    private long diveEndTime;
+    
 
     public SaragaZombie(int x, int y) {
         super(125, 50, 1, x, y, true);
@@ -21,7 +21,6 @@ public class SaragaZombie extends Zombie {
     }
 
     public void emerge() {
-        // The zombie emerges when the dive time ends
         if (isDived) {
             isDived = false;
             takeDamage(attackDamage);
@@ -39,31 +38,13 @@ public class SaragaZombie extends Zombie {
     @Override
     public void takeDamage(int damage) {
         if (!isDived) {
-            super.takeDamage(damage);  // Only take damage if not dived
+            super.takeDamage(damage); 
         }
     }
 
 
 
-    // @Override
-    // public void excecute() {
-    //     if (isZombieBergerak()) {
-    //         if (!isDived) {
-    //             dive();
-    //         } else if (isDived) {
-    //             emerge();
-    //         } else {
-    //             super.bergerak();
-    //         }
-    //     }
-    //     if (!isDived) {
-    //         Plant target = gameMap.getPlant(getX(), getY());
-    //         if (target != null) {
-    //             attackPlant(target);
-    //         }
-    //     }
-    // }
-
+   
 
 
     

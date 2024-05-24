@@ -8,16 +8,6 @@ public class NormalZombie extends Zombie {
         super(125, 100, 1, x, y, false);
     }
 
-    // @Override
-    // public void move() {
-    //     long currentTime = System.currentTimeMillis();
-    //     if (currentTime >= nextMoveTime) {
-    //         if (x > 0) {
-    //             x--; // Move zombie one step to the left
-    //         }
-    //         updateNextMoveTime();
-    //     }
-    // }
 
     public void attack(Plant plant) {
         if (plant != null) {
